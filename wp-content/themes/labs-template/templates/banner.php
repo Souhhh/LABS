@@ -2,7 +2,7 @@
   <div class="hero-section">
     <div class="hero-content">
       <div class="hero-center">
-        <img src="http://localhost:8080/wp-content/themes/labs-template/img/big-logo.png" <?php echo get_bloginfo('logo');?> alt="">
+        <img src="http://localhost:8080/wp-content/themes/labs-template/img/big-logo.png" alt="">
         <p><?php echo get_bloginfo('name');?></p>
       </div>
     </div>
