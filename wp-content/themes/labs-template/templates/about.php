@@ -22,7 +22,7 @@ $title3 = get_theme_mod('labs-about-title3', __('Titre de la section'));
           </div>
         </div>
         <div class="text-center mt60">
-          <a href="" class="site-btn">Browse</a>
+          <a href="blog" class="site-btn">Browse</a>
         </div>
         <!-- popup video -->
         <div class="intro-video">

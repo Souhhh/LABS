@@ -32,7 +32,13 @@ public static function ajout_personnalisation_about($wp_customize)
     $wp_customize->add_section('labs-about-section-text', [
         'panel' => 'labs-panel-home',
         'title' => __('Section about'),
-        'description' => __('Personnalisez le texte')
+        'description' => __('Personnalisez le titre et le texte')
+    ]);
+    // Création de la 'Section testimonial' (dans le panel Home page)
+    $wp_customize->add_section('labs-section-testimonial', [
+        'panel' => 'labs-panel-home',
+        'title' => __('Section testimonial'),
+        'description' => __('Personnalisez le titre')
     ]);
     
     // Ajout d'un setting qui contiendra des informations dans la base de données sous la clé correspondant à son id (premier paramètre)
@@ -84,6 +90,12 @@ public static function ajout_personnalisation_about($wp_customize)
         'type' => 'theme_mod',
         'sanitize_callback' => 'sanitize_textarea_field'
     ]);
+    // Setting pour le changement du titre de la section testimonial
+    $wp_customize->add_setting('labs-testinomial', [
+        'type' => 'theme_mod',
+        'sanitize_callback' => 'sanitize_textarea_field'
+    ]);
+
 
 
     // Ajout d'un control (un label avec input et autres informations). Le control doit être attaché à une section ainsi qu'à un setting.
@@ -181,6 +193,14 @@ public static function ajout_personnalisation_about($wp_customize)
             )
         )
     );
+    // Control pour la section testimonial
+    $wp_customize->add_control('labs-testimonial-title', [
+        'section' => 'labs-section-testimonial',
+        'settings' => 'labs-testinomial',
+        'label' => __('Titre de la section'),
+        'description' => __('Personnalisez le titre de la section'),
+        'type' => 'textarea'
+    ]);
 }
 }
 add_action('customize_register', [MgCustomizer::class, 'ajout_personnalisation_about']);
