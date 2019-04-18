@@ -12,7 +12,13 @@ require_once(INCLUDE_DIR . '/theme-setup.php');
 require_once(INCLUDE_DIR . '/customizer.php');
 
 
+function aLaLigne($settingKey)
+{
+    $titre = get_theme_mod($settingKey);
+    $titre = str_replace("|br|", "</br>", $titre);
 
+    return $titre;
+}
 
 
 

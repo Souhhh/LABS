@@ -4,6 +4,8 @@ $text_column_right = get_theme_mod('labs-about-text-right', __('Texte about droi
 $title1 = get_theme_mod('labs-about-title1', __('Titre de la section'));
 $title2 = get_theme_mod('labs-about-title2', __('Titre de la section'));
 $title3 = get_theme_mod('labs-about-title3', __('Titre de la section'));
+$video = get_theme_mod('labs-video');
+$vignette = get_theme_mod('labs-video-vign');
 ?>
 
 
@@ -28,8 +30,8 @@ $title3 = get_theme_mod('labs-about-title3', __('Titre de la section'));
         <div class="intro-video">
           <div class="row">
             <div class="col-md-8 col-md-offset-2">
-              <img src="http://localhost:8080/wp-content/themes/labs-template/img/video.jpg" alt="">
-              <a href="https://www.youtube.com/watch?v=JgHfx2v9zOU" class="video-popup">
+              <img src="<?php echo  $vignette; ?>" alt="">
+              <a href="<?php echo $video; ?>" class="video-popup">
                 <i class="fa fa-play"></i>
               </a>
             </div>
@@ -39,3 +41,4 @@ $title3 = get_theme_mod('labs-about-title3', __('Titre de la section'));
     </div>
   </div>
   <!-- About section end -->
+ 
