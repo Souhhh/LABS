@@ -20,7 +20,7 @@ class EnqueueScript
         wp_enqueue_style('magnific-popup', get_template_directory_uri() . '/css/magnific-popup.css');
         wp_enqueue_style('carousel', get_template_directory_uri() . '/css/owl.carousel.css');
         wp_enqueue_style('style', get_template_directory_uri() . '/css/style.css');
-     
+        
         
 
         // Ajout des scripts js
