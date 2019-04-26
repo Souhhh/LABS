@@ -1,14 +1,14 @@
 <?php
 get_header();
-// Ce fichier template spécial de WordPress est appelé suite à une recherche avec un formulaire de type get qui pointe sur l'url de base du site.
+// Ce fichier template spécial de WordPress est appelé pour afficher les catégories ou taxonomies ou autre archive. Voir le wp hierarchy.
 ?>
 
 
 <div class="container single-post-container">
-    <h1>Résultat de la recherche pour
-        <span>"
-            <?php echo get_search_query(); ?>"</span>
+    <h1>
+        <?php the_archive_title(); ?>
     </h1>
+
     <ul class="list-group mb-5">
         <!-- Dans cette boucle, nous allons récupérer tous les posts qui correspondent à la recherche. -->
         <?php while (have_posts()) : the_post(); ?>
@@ -20,6 +20,7 @@ get_header();
         <?php endwhile; ?>
     </ul>
 </div>
+
 
 <?php
 get_footer();
