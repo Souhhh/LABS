@@ -53,7 +53,7 @@ class ServicesPostType
                 ],
                 'menu_icon' => 'dashicons-nametag',
                 // On choisi dans supports ce qu'on veut rendre accessible dans notre post-type : un titre, un textarea, un extrait et la possibilité de rajouter une image mise en avant.
-                'supports' => ['title', 'editor', 'excerpt', 'thumbnail'],
+                'supports' => ['title', 'editor', 'thumbnail'],
             ]
         );
     }

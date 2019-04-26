@@ -11,9 +11,8 @@
 
       </div>
       <div class="text-center">
-        <a href="" class="site-btn">Browse</a>
+        <a href="<?= get_page_link(53); ?>" class="site-btn">Browse</a> 
       </div>
     </div>
   </div>
   <!-- services section end -->
-

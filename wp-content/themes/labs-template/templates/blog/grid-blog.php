@@ -11,7 +11,8 @@
 					$query = new WP_Query($args);
 					// La fonction wp_reset_query() permet de réinitialiser les valeurs $post en fonction du context
 					wp_reset_query();
-					while ($query->have_posts()) : $query->the_post(); ?>
+					while ($query->have_posts()) : $query->the_post(); 
+					$post_id = get_the_ID($query); ?>
 						<div class="post-item">
 							<div class="post-thumbnail">
 								<img src="<?php the_post_thumbnail_url()
@@ -33,7 +34,7 @@
 								<p class="post-content">
 									<?php the_content(); ?>
 								</p>
-								<a href="" class="read-more">Read More</a>
+								<a class="read-more" href="<?php the_permalink($post_id); ?>">Read More</a>
 							</div>
 						</div>
 					<?php endwhile; ?>

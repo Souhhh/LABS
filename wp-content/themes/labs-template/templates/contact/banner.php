@@ -5,7 +5,7 @@
 			<div class="page-info">
 				<h2>Contact</h2>
 				<div class="page-links">
-					<a href="#">Home</a>
+					<a href="<?php echo get_site_url(); ?>">Home</a>
 					<span>Contact</span>
 				</div>
 			</div>

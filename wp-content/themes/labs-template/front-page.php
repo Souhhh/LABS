@@ -1,3 +1,5 @@
+<!-- Le fichier front-page.php est le fichier qui devrait être utilisé pour afficher une page d'avvueil. Le fichier index.php lui n'est là qu'en dernier recours. -->
+
 <?php
     // Ajour de la navbar
     get_header();
@@ -21,4 +23,4 @@
 
     // Ajout du footer
     get_footer();
-?>
+?> 

@@ -11,7 +11,7 @@
     // Ajout de la section testimonial
     get_template_part('templates/testimonial');
     // Ajout de la section services
-    get_template_part('template/services');
+    get_template_part('templates/services');
     // Ajout de la section team
     get_template_part('templates/team');
     // Ajout de la section promotion
@@ -21,4 +21,4 @@
 
     // Ajout du footer
     get_footer();
-?>
+?> 

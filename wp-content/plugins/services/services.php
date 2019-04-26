@@ -1,7 +1,5 @@
 <?php
 
-// On use ici un namespace (celui qu'on crée ligne 2 dans autoload.php). L'avantage de cette écriture là c'est qu'on crée un 'alias' avec la commande 'as' ce qui fait qu'à la ligne 26, on peut simplement écrire ServicesPostType::class. Pour l'exemple, j'ai précisé que l'alias était ServicesPostType mais à vrai dire c'est nécessaire que si on modifie le nom de la class. 
-use App\Features\PostTypes\ServicesPostType as ServicesPostType;
 
 
 /**
@@ -14,20 +12,15 @@ use App\Features\PostTypes\ServicesPostType as ServicesPostType;
  * Domain Path: /languages
  * Version: 0.1.1
  * 
- * @package Services
+ * @package Servicesadd_meta_boxes_recipe
  */
 
-// Your code starts here.
+// Your code starts add_meta_boxes_recipe
+
 
 
 // On require_once le fichier autoload.php qui lui fera un require_once pour toutes les class qui ont besoin d'être chargées.
 require_once('autoload.php');
 
-// Importation du fichier ServicesPostType avec la function php 'require_once'
-// require_once('App/Features/PostTypes/ServicesPostType.php');
-
-
-add_action('init', [ServicesPostType::class, 'register']);
-
-
-
+// J'inclus le fichier bootstrap qui lui contient tous les require_once. Le but est de structurer nos fichiers, nos dossiers et de faire les appels de manière structurée dans les bons fichiers en se basant sur le structure et le fonctionnement de Laravel pour qu'on ai déjà une premire approche avec la structure de Laravel.
+require_once('bootstrap.php');

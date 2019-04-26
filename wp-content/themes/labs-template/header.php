@@ -37,9 +37,11 @@ $logo1 = get_theme_mod('labs-header', __('Changer le logo du menu'));
 
   <!-- Header section -->
   <header class="header-section">
-    <div class="logo">
-      <img src="<?php echo $logo1; ?>" alt=""><!-- Logo -->
-    </div>
+    <a href="<?php echo get_site_url(); ?>">
+      <div class="logo">
+        <img src="<?php echo $logo1; ?>" alt="">
+      </div>
+    </a>
     <!-- Navigation -->
     <div class="responsive"><i class="fa fa-bars"></i></div>
     <nav>
