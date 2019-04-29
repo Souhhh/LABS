@@ -5,8 +5,8 @@ get_header();
 
 <div class="container single-post-container">
     <div class="jumbotron">
-        <h1 class="text-center">OUPS la page que vous cherchez n'existe pas.</h1>
-        <h1 class="text-center">404</h1>
+        <h2 class="text-center">OUPS la page que vous cherchez n'existe pas.</h2>
+        <h2 class="text-center">404</h2>
     </div>
 </div>
 

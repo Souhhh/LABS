@@ -18,7 +18,7 @@ get_template_part('templates/blog/banner');
                             // Ajout de l'image thumbnail du post en choisissant parmi les 4 tailles de base
                             // thumbnail | medium | medium_large | large
                             // Il est possible de passer un deuxième paramètre pour passer des attributs (voir la doc de la function)
-                            the_post_thumbnail('medium_large')
+                            the_post_thumbnail('medium_large');
                             ?>
 
                             <div class="post-date">
@@ -80,27 +80,29 @@ get_template_part('templates/blog/banner');
                     <div class="row">
                         <div class="col-md-9 comment-from">
                             <h2>Leave a comment</h2>
-                            <form class="form-class">
+                            <form class="form-class" method="post" action="<?php echo get_home_url()?>/wp-comments-post.php">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <input type="text" name="name" placeholder="Your name">
+                                        <input type="text" name="author" placeholder="Your name">
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="text" name="email" placeholder="Your email">
                                     </div>
                                     <div class="col-sm-12">
-                                        <input type="text" name="subject" placeholder="Subject">
-                                        <textarea name="message" placeholder="Message"></textarea>
-                                        <button class="site-btn">send</button>
+                                        <input type="text" name="url" placeholder="Url">
+                                        <textarea name="comment" placeholder="Message"></textarea>
+                                        <!-- <button class="site-btn">send</button> -->
+                                        <input name="submit" type="submit" id="submit" class="site-btn" value="Laisser un commentaire">
+                                        <input type="hidden" name="comment_post_ID" value="<?php the_ID();?>" id="comment_post_ID">
+                                        <input type="hidden" name="comment_parent" id="comment_parent" value="0">
                                     </div>
                                 </div>
+                                <?php// comment_form(); ?>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-
-
 <?php
 get_template_part('templates/blog/widget');
 get_footer();
