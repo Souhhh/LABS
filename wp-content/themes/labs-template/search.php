@@ -1,8 +1,8 @@
 <?php
 get_header();
 // Ce fichier template spécial de WordPress est appelé suite à une recherche avec un formulaire de type get qui pointe sur l'url de base du site.
+get_template_part('templates/blog/banner');
 ?>
-
 
 <div class="container single-post-container">
     <h1>Résultat de la recherche pour

@@ -15,8 +15,8 @@
 			<div class="post-thumbnail">
 				<img src="<?php the_post_thumbnail_url(); ?>" alt="">
 				<div class="post-date">
-					<h2>03</h2>
-					<h3>Nov 2017</h3>
+					<h2><?php the_time('j'); ?></h2>
+					<h3><?php the_time('F Y'); ?></h3>
 				</div>
 			</div>
 			<div class="">
@@ -24,9 +24,16 @@
 					<?php the_title(); ?>
 				</h2>
 				<div class="post-meta">
-					<a href="">Loredana Papp</a>
-					<a href="">Design, Inspiration</a>
-					<a href="">2 Comments</a>
+					<a href=""><?php the_author(); ?></a>
+					<a href=""> <?php $postTags = get_the_tags();
+					if ($postTags){
+						foreach($postTags as $tag){
+							echo $tag->name . "," . ' ' . '';
+						}
+					}
+					?>
+					</a>
+					<a href=""><?php comments_number(); ?></a>
 				</div>
 				<p class="post-content">
 						<?php the_content(); ?>

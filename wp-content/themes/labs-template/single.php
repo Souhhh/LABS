@@ -3,7 +3,7 @@ get_header();
 get_template_part('templates/blog/banner');
 ?>
 
-
+ 
 
 <!-- page section -->
 <div class="page-section spad">
