@@ -3,7 +3,7 @@ get_header();
 get_template_part('templates/blog/banner');
 ?>
 
- 
+
 
 <!-- page section -->
 <div class="page-section spad">
@@ -99,6 +99,10 @@ get_template_part('templates/blog/banner');
                                 </div>
                                 <?php// comment_form(); ?>
                             </form>
+                            <?php $commentaires = get_comments();
+                                foreach($commentaires as $commentaire) :?>
+                                <div><?php echo get_comment_author( $commentaire ); ?></div>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                 </div>
