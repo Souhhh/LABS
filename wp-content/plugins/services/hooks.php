@@ -4,11 +4,16 @@
 // J'ai copié collé (mis à part require autoload) le contenu de services.php ici même.
 use App\Features\PostTypes\ServicesPostType;
 use App\Features\MetaBoxes\ServicesDetailsMetabox;
+use App\Features\PostTypes\TestimonialsPostType;
+use App\Features\MetaBoxes\TestimonialsDetailsMetabox;
 
-
+// add_action pour le post type SERVICES
 add_action('init', [ServicesPostType::class, 'register']);
-
-add_action('add_meta_boxes_services', [ServicesDetailsMetabox::class, 'add_meta_box']);
-
+add_action('add_meta_boxes_services', [ServicesDetailsMetabox::class, 'add_meta_box']); // attention : après le add_meta_boxes_, on doit mettre le slug du post type !!
 // On fini par lancer la function save quand le hook save_post_$slug est appelé.
 add_action('save_post_' . ServicesPostType::$slug, [ServicesDetailsMetabox::class, 'save']);
+
+// add_action pour le post type TESTIMONIALS
+add_action('init', [TestimonialsPostType::class, 'register']);
+add_action('add_meta_boxes_testimonials', [TestimonialsDetailsMetabox::class, 'add_meta_box']);
+add_action('save_post_' . TestimonialsPostType::$slug, [TestimonialsDetailsMetabox::class, 'save']);

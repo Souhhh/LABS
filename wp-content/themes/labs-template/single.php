@@ -123,8 +123,6 @@ get_template_part('templates/blog/banner');
                                         <input type="hidden" name="comment_parent" id="comment_parent" value="0">
                                     </div>
                                 </div>
-                                <? php
-                                ?>
                             </form>
                         </div>
                     </div>
