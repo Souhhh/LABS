@@ -9,12 +9,12 @@
       'orderby' => 'rand',
       // 'category_name' => 'services-card'
     ];
-    $queryCards = new WP_Query($args);
+    $query = new WP_Query($args);
     ?>
     <div class="card-section">
       <div class="container">
         <div class="row">
-          <?php while ($queryCards->have_posts()) : $queryCards->the_post(); 
+          <?php while ($query->have_posts()) : $query->the_post(); 
           $icon = get_post_meta(get_the_ID(), 'choix_icone', true); ?>
             <!-- single card -->
             <div class="col-md-4 col-sm-6">

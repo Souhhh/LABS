@@ -8,8 +8,9 @@ $title = get_theme_mod('labs-testinomial', __('Changer le titre')); // On doit m
 
   <?php
   $args = [
-    'post-type' => 'post',
+    'post_type' => 'testimonials',
     'posts_per_page' => 6,
+    'order' => 'DESC',
     // 'category_name' => 'testimonials'
   ];
   $query = new WP_Query($args);
@@ -23,17 +24,18 @@ $title = get_theme_mod('labs-testinomial', __('Changer le titre')); // On doit m
         </div>
         <div class="owl-carousel" id="testimonial-slide">
           <?php while ($query->have_posts()) : $query->the_post(); ?>
+          <?php $temoignages = get_post_meta(get_the_ID(), 'infos_temoignages', true); ?>
             <!-- single testimonial -->
             <div class="testimonial">
               <span>‘​‌‘​‌</span>
-              <p><?php the_content(); ?>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est, feugiat nec elementum id, suscipit id nulla. Nulla sit amet luctus dolor. Etiam finibus consequa.</p>
+              <p><?php the_content(); ?></p>
               <div class="client-info">
                 <div class="avatar">
-                  <img src="http://localhost:8080/wp-content/themes/labs-template/img/avatar/01.jpg" alt="">
+                  <?php the_post_thumbnail(); ?>
                 </div>
                 <div class="client-name">
-                  <h2>Michael Smith</h2>
-                  <p>CEO Company</p>
+                  <h2><?php the_title(); ?></h2>
+                  <p><?= $temoignages; ?></p>
                 </div>
               </div>
             </div>

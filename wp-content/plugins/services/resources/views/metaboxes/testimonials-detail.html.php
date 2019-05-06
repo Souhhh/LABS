@@ -1,1 +1,1 @@
-<input type="text">
+<input type="text" name="labs_infos_temoignages" id="labs_infos_temoignages" value="<?php echo $temoignages ?>">
