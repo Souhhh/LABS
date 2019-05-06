@@ -1,107 +1,31 @@
-<div class="col-md-4 col-sm-6">
-          <div class="service">
-            <div class="icon">
-              <i class="flaticon-023-flask"></i>
-            </div>
-            <div class="service-text">
-              <h2>Get in the lab</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est, feugiat nec elementum id, suscipit id nulla..</p>
-            </div>
-          </div>
-        </div>
-        <!-- single service -->
-        <div class="col-md-4 col-sm-6">
-          <div class="service">
-            <div class="icon">
-              <i class="flaticon-011-compass"></i>
-            </div>
-            <div class="service-text">
-              <h2>Projects online</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est, feugiat nec elementum id, suscipit id nulla..</p>
-            </div>
-          </div>
-        </div>
-        <!-- single service -->
-        <div class="col-md-4 col-sm-6">
-          <div class="service">
-            <div class="icon">
-              <i class="flaticon-037-idea"></i>
-            </div>
-            <div class="service-text">
-              <h2>SMART MARKETING</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est, feugiat nec elementum id, suscipit id nulla..</p>
-            </div>
-          </div>
-        </div>
-        <!-- single service -->
-        <div class="col-md-4 col-sm-6">
-          <div class="service">
-            <div class="icon">
-              <i class="flaticon-039-vector"></i>
-            </div>
-            <div class="service-text">
-              <h2>Social Media</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est, feugiat nec elementum id, suscipit id nulla..</p>
-            </div>
-          </div>
-        </div>
-        <!-- single service -->
-        <div class="col-md-4 col-sm-6">
-          <div class="service">
-            <div class="icon">
-              <i class="flaticon-036-brainstorming"></i>
-            </div>
-            <div class="service-text">
-              <h2>Brainstorming</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est, feugiat nec elementum id, suscipit id nulla..</p>
-            </div>
-          </div>
-        </div>
-        <!-- single service -->
-        <div class="col-md-4 col-sm-6">
-          <div class="service">
-            <div class="icon">
-              <i class="flaticon-026-search"></i>
-            </div>
-            <div class="service-text">
-              <h2>Documented</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est, feugiat nec elementum id, suscipit id nulla..</p>
-            </div>
-          </div>
-        </div>
-        <!-- single service -->
-        <div class="col-md-4 col-sm-6">
-          <div class="service">
-            <div class="icon">
-              <i class="flaticon-018-laptop-1"></i>
-            </div>
-            <div class="service-text">
-              <h2>Responsive</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est, feugiat nec elementum id, suscipit id nulla..</p>
-            </div>
-          </div>
-        </div>
-        <!-- single service -->
-        <div class="col-md-4 col-sm-6">
-          <div class="service">
-            <div class="icon">
-              <i class="flaticon-043-sketch"></i>
-            </div>
-            <div class="service-text">
-              <h2>Retina ready</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est, feugiat nec elementum id, suscipit id nulla..</p>
-            </div>
-          </div>
-        </div>
-        <!-- single service -->
-        <div class="col-md-4 col-sm-6">
-          <div class="service">
-            <div class="icon">
-              <i class="flaticon-012-cube"></i>
-            </div>
-            <div class="service-text">
-              <h2>Ultra modern</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est, feugiat nec elementum id, suscipit id nulla..</p>
-            </div>
-          </div>
-        </div>
+<!-- Partie des 9 services aléatoires -->
+<?php
+$args = [
+  'post_type' => 'services',
+  'posts_per_page' => 9,
+  'orderby' => 'rand',
+];
+$query = new WP_Query($args);
+?>
+
+<?php while ($query->have_posts()) :
+  $query->the_post();
+  $icon = get_post_meta(get_the_ID(), 'choix_icone', true); ?>
+
+  <div class="col-md-4 col-sm-6">
+    <div class="service">
+      <div class="icon">
+        <i class="<?= $icon ?>"></i>
+      </div>
+      <div class="service-text">
+        <h2><?php the_title(); ?></h2>
+        <p><?php the_content(); ?></p>
+      </div>
+    </div>
+  </div>
+<?php
+endwhile;
+wp_reset_postdata();
+?>
+
+
