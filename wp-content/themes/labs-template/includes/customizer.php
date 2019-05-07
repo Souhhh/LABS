@@ -162,6 +162,21 @@ class MgCustomizer
             'type' => 'theme_mod',
             'sanitize_callback' => 'sanitize_textarea_field'
         ]);
+        // Setting pour le membre de la team
+        $wp_customize->add_setting('labs-team-pers', [
+            'type' => 'theme_mod',
+            'sanitize_callback' => 'sanitize_textarea_field'
+        ]);
+        // Setting pour le nom et prénom du membre de l'équipe du milieu 
+        $wp_customize->add_setting('labs-team-name', [
+            'type' => 'theme_mod',
+            'sanitize_callback' => 'sanitize_textarea_field'
+        ]);
+        // Setting pour le métier du membre de l'équipe du milieu 
+        $wp_customize->add_setting('labs-team-job', [
+            'type' => 'theme_mod',
+            'sanitize_callback' => 'sanitize_textarea_field'
+        ]);
         // SECTION PROMOTION
         // Setting pour le titre de la section promotion
         $wp_customize->add_setting('labs-promotion-title', [
@@ -218,7 +233,7 @@ class MgCustomizer
         $wp_customize->add_control('labs-about-text-title2-control', [
             'section' => 'labs-about-section-text',
             'settings' => 'labs-about-title2',
-            'label' => __('Titre de la section'),
+            // 'label' => __('Titre de la section'),
             // 'description' => __('Personnalisez la partie verte du titre'),
             'type' => 'text'
         ]);
@@ -226,7 +241,7 @@ class MgCustomizer
         $wp_customize->add_control('labs-about-text-title3-control', [
             'section' => 'labs-about-section-text',
             'settings' => 'labs-about-title3',
-            'label' => __('Titre de la section'),
+            // 'label' => __('Titre de la section'),
             // 'description' => __('Personnalisez la partie droite du titre'),
             'type' => 'text'
         ]);
@@ -341,7 +356,7 @@ class MgCustomizer
         $wp_customize->add_control('labs-team-title2-control', [
             'section' => 'labs-section-team',
             'settings' => 'labs-team-title2',
-            'label' => __('Titre de la section'),
+            // 'label' => __('Titre de la section'),
             'description' => __('Personnalisez la partie verte du titre'),
             'type' => 'text'
         ]);
@@ -349,8 +364,37 @@ class MgCustomizer
         $wp_customize->add_control('labs-team-title3-control', [
             'section' => 'labs-section-team',
             'settings' => 'labs-team-title3',
-            'label' => __('Titre de la section'),
+            // 'label' => __('Titre de la section'),
             'description' => __('Personnalisez la partie droite du titre'),
+            'type' => 'text'
+        ]);
+        // Control pour la photo du memebre de la team
+        $wp_customize->add_control(
+            new WP_Customize_Image_Control(
+                $wp_customize,
+                'team',
+                array(
+                    'label'      => __('Données membre de l\'équipe'),
+                    'section'    => 'labs-section-team',
+                    'settings'   => 'labs-team-pers',
+                    'context'    => 'your_setting_context'
+                )
+            )
+        );
+        // Control pour la partie name du membre de la team
+        $wp_customize->add_control('labs-team-name-control', [
+            'section' => 'labs-section-team',
+            'settings' => 'labs-team-name',
+            // 'label' => __('Titre de la section'),
+            'description' => __('Entrez le nom et prénom'),
+            'type' => 'text'
+        ]);
+        // Control pour la partie name du membre de la team
+        $wp_customize->add_control('labs-team-job-control', [
+            'section' => 'labs-section-team',
+            'settings' => 'labs-team-job',
+            // 'label' => __('Titre de la section'),
+            'description' => __('Entrez le métier/fonction'),
             'type' => 'text'
         ]);
         // SECTION PROMOTION
