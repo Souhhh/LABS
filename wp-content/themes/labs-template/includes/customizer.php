@@ -23,6 +23,11 @@ class MgCustomizer
             'title' => __('Contact page'),
             'Description' => __('Personnalisation de la page Contact')
         ]);
+        // Création du panel pour la Services page
+        $wp_customize->add_panel('labs-panel-services', [
+            'title' => __('Services page'),
+            'Description' => __('Personnalisation de la page Services')
+        ]);
 
         // Ajout d'une section à un panel défini. Si pas de panel défini, alors la section sera visible directement
         // Attention, il faut que le panel ait déjà été ajouté pour que la section puisse s'y greffer.
@@ -73,6 +78,18 @@ class MgCustomizer
         $wp_customize->add_section('labs-maps', [
             'panel' => 'labs-panel-contact',
             'title' => __('Google map'),
+            // 'description' => __('Personnalisez le titre')
+        ]);
+        // Création de la 'Section services' (dans le panel Services page)
+        $wp_customize->add_section('labs-serv', [
+            'panel' => 'labs-panel-services',
+            'title' => __('Section services'),
+            // 'description' => __('Personnalisez le titre')
+        ]);
+        // Création de la 'Section projets' (dans le panel Services page)
+        $wp_customize->add_section('labs-projets', [
+            'panel' => 'labs-panel-services',
+            'title' => __('Section projets'),
             // 'description' => __('Personnalisez le titre')
         ]);
 
@@ -212,6 +229,39 @@ class MgCustomizer
         // CONTACT PAGE
         // Setting pour la Google map
         $wp_customize->add_setting('labs-contact-google', [
+            'type' => 'theme_mod',
+            'sanitize_callback' => 'sanitize_textarea_field'
+        ]);
+        // SECTION SERVICES
+        // SOUS-SECTION SERVICES
+        // Setting pour le changement de la partie 1 du titre de la section
+        $wp_customize->add_setting('labs-serv-title1', [
+            'type' => 'theme_mod',
+            'sanitize_callback' => 'sanitize_textarea_field'
+        ]);
+        // Setting pour la partie en vert du titre
+        $wp_customize->add_setting('labs-serv-title2', [
+            'type' => 'theme_mod',
+            'sanitize_callback' => 'sanitize_textarea_field'
+        ]);
+        // Setting pour la partie 3 du titre
+        $wp_customize->add_setting('labs-serv-title3', [
+            'type' => 'theme_mod',
+            'sanitize_callback' => 'sanitize_textarea_field'
+        ]);
+        // SOUS-SECTION PROJETS
+        // Setting pour le changement de la partie 1 du titre de la section
+        $wp_customize->add_setting('labs-proj-title1', [
+            'type' => 'theme_mod',
+            'sanitize_callback' => 'sanitize_textarea_field'
+        ]);
+        // Setting pour la partie en vert du titre
+        $wp_customize->add_setting('labs-proj-title2', [
+            'type' => 'theme_mod',
+            'sanitize_callback' => 'sanitize_textarea_field'
+        ]);
+        // Setting pour la partie 3 du titre
+        $wp_customize->add_setting('labs-proj-title3', [
             'type' => 'theme_mod',
             'sanitize_callback' => 'sanitize_textarea_field'
         ]);
@@ -460,6 +510,57 @@ class MgCustomizer
                 )
             )
         );
+        // PAGE SERVICES
+        // SOUS-SECTION SERVICES
+        // Control pour la partie 1 du titre
+        $wp_customize->add_control('labs-serv-title1-control', [
+            'section' => 'labs-serv',
+            'settings' => 'labs-serv-title1',
+            'label' => __('Titre de la section'),
+            // 'description' => __('Personnalisez la partie gauche du titre'),
+            'type' => 'text'
+        ]);
+        // Control pour la partie en couleur du titre
+        $wp_customize->add_control('labs-serv-title2-control', [
+            'section' => 'labs-serv',
+            'settings' => 'labs-serv-title2',
+            // 'label' => __('Titre de la section'),
+            // 'description' => __('Personnalisez la partie verte du titre'),
+            'type' => 'text'
+        ]);
+        // Control pour la partie 3 du titre
+        $wp_customize->add_control('labs-serv-title3-control', [
+            'section' => 'labs-serv',
+            'settings' => 'labs-serv-title3',
+            // 'label' => __('Titre de la section'),
+            // 'description' => __('Personnalisez la partie droite du titre'),
+            'type' => 'text'
+        ]);
+        // SOUS-SECTION PROJETS
+        // Control pour la partie 1 du titre
+        $wp_customize->add_control('labs-proj-title1-control', [
+            'section' => 'labs-projets',
+            'settings' => 'labs-proj-title1',
+            'label' => __('Titre de la section'),
+            // 'description' => __('Personnalisez la partie gauche du titre'),
+            'type' => 'text'
+        ]);
+        // Control pour la partie en couleur du titre
+        $wp_customize->add_control('labs-proj-title2-control', [
+            'section' => 'labs-projets',
+            'settings' => 'labs-proj-title2',
+            // 'label' => __('Titre de la section'),
+            // 'description' => __('Personnalisez la partie verte du titre'),
+            'type' => 'text'
+        ]);
+        // Control pour la partie 3 du titre
+        $wp_customize->add_control('labs-proj-title3-control', [
+            'section' => 'labs-projets',
+            'settings' => 'labs-proj-title3',
+            // 'label' => __('Titre de la section'),
+            // 'description' => __('Personnalisez la partie droite du titre'),
+            'type' => 'text'
+        ]);
     }
 }
 add_action('customize_register', [MgCustomizer::class, 'ajout_personnalisation_about']);

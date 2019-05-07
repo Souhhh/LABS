@@ -1,8 +1,15 @@
-  <!-- services section -->
+<?php
+$title1 = get_theme_mod('labs-serv-title1');
+$title2 = get_theme_mod('labs-serv-title2');
+$title3 = get_theme_mod('labs-serv-title3');
+?>
+
+
+<!-- services section -->
   <div class="services-section spad">
     <div class="container">
       <div class="section-title dark">
-        <h2>Get in <span>the Lab</span> and see the services</h2>
+        <h2><?= $title1; ?> <span><?= $title2; ?></span> <?= $title3; ?></h2>
       </div>
       <div class="row">
         <!-- single service -->
@@ -115,7 +122,7 @@
         </div>
       </div>
       <div class="text-center">
-        <a href="" class="site-btn">Browse</a>
+        <!-- <a href="" class="site-btn">Browse</a> -->
       </div>
     </div>
   </div>

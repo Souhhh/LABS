@@ -1,9 +1,15 @@
-  <!-- features section -->
+<?php
+$title1 = get_theme_mod('labs-proj-title1');
+$title2 = get_theme_mod('labs-proj-title2');
+$title3 = get_theme_mod('labs-proj-title3');
+?>
+
+<!-- features section -->
   <div class="team-section spad">
     <div class="overlay"></div>
     <div class="container">
       <div class="section-title">
-        <h2>Get in <span>the Lab</span> and discover the world</h2>
+        <h2><?= $title1; ?> <span><?= $title2; ?></span> <?= $title3; ?></h2>
       </div>
       <div class="row">
         <!-- feature item -->
