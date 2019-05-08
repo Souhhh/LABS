@@ -1,4 +1,9 @@
 <div class="col-md-8 col-sm-7 blog-posts">
+	<?php
+	$paged = (get_query_var('paged')) ?
+	get_query_var('paged') : 1;
+	?>
+
 	<!-- Post item -->
 	<?php
 	// Nous allons faire en sorte d'aller chercher tous les articles pour les afficher sur la page
@@ -6,11 +11,12 @@
 	$args = [
 		'post_type' => 'post',
 		'posts_per_page' => 3, // pour récupérer que mes 3 derniers articles
+		'paged' => $paged,
 	];
 	$query = new WP_Query($args);
 	// La fonction wp_reset_query() permet de réinitialiser les valeurs $post en fonction du context
 	while ($query->have_posts()) : $query->the_post();
-		$post_id = get_the_ID(); ?>
+		$post_id = get_the_ID($query); ?>
 		<div class="post-item">
 			<div class="post-thumbnail">
 				<img src="<?php the_post_thumbnail_url(); ?>" alt="">
@@ -45,9 +51,24 @@
 
 
 	<!-- Pagination -->
-	<div class="page-pagination">
+	<!-- <div class="page-pagination">
 		<a class="active" href="">01.</a>
 		<a href="">02.</a>
 		<a href="">03.</a>
+	</div> -->
+
+	<div class="page-pagination">
+		<?php
+		$current_page = max(1, get_query_var('paged'));
+		echo paginate_links(array(
+			'format' => '/page/%#%',
+			'current' => $current_page,
+			'total' => $query->max_num_pages,
+			'prev_text' => __('« Prev'),
+			'next_text' => __('Next »'),
+		));
+		wp_reset_postdata();
+		?>
+
 	</div>
 </div>
