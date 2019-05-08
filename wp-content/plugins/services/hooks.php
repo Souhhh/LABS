@@ -8,6 +8,8 @@ use App\Features\PostTypes\TestimonialsPostType;
 use App\Features\MetaBoxes\TestimonialsDetailsMetabox;
 use App\Features\PostTypes\TeamPostType;
 use App\Features\MetaBoxes\TeamDetailsMetabox;
+use App\Features\PostTypes\ProjetsPostType;
+use App\Features\MetaBoxes\ProjetsDetailsMetabox;
 
 // add_action pour le post type SERVICES
 add_action('init', [ServicesPostType::class, 'register']);
@@ -24,3 +26,8 @@ add_action('save_post_' . TestimonialsPostType::$slug, [TestimonialsDetailsMetab
 add_action('init', [TeamPostType::class, 'register']);
 add_action('add_meta_boxes_team', [TeamDetailsMetabox::class, 'add_meta_box']);
 add_action('save_post_' . TeamPostType::$slug, [TeamDetailsMetabox::class, 'save']);
+
+// add_action pour le post type PROJETS
+add_action('init', [ProjetsPostType::class, 'register']);
+add_action('add_meta_boxes_projets', [ProjetsDetailsMetabox::class, 'add_meta_box']);
+add_action('save_post_' . ProjetsPostType::$slug, [ProjetsDetailsMetabox::class, 'save']);
