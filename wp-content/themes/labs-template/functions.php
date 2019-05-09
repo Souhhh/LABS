@@ -20,3 +20,5 @@ function aLaLigne($settingKey)
 
     return $titre;
 }
+
+
