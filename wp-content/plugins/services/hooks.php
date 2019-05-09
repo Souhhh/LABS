@@ -11,6 +11,10 @@ use App\Features\MetaBoxes\TeamDetailsMetabox;
 use App\Features\PostTypes\ProjetsPostType;
 use App\Features\MetaBoxes\ProjetsDetailsMetabox;
 
+use App\Features\Pages\Page;
+use App\Features\Pages\SendMail;
+
+
 // add_action pour le post type SERVICES
 add_action('init', [ServicesPostType::class, 'register']);
 add_action('add_meta_boxes_services', [ServicesDetailsMetabox::class, 'add_meta_box']); // attention : après le add_meta_boxes_, on doit mettre le slug du post type !!
@@ -31,3 +35,8 @@ add_action('save_post_' . TeamPostType::$slug, [TeamDetailsMetabox::class, 'save
 add_action('init', [ProjetsPostType::class, 'register']);
 add_action('add_meta_boxes_projets', [ProjetsDetailsMetabox::class, 'add_meta_box']);
 add_action('save_post_' . ProjetsPostType::$slug, [ProjetsDetailsMetabox::class, 'save']);
+
+
+// add_action pour les MAILS
+add_action('admin_menu', [Page::class, 'init']);
+add_action('admin_action_send-mail', [SendMail::class, 'send_mail']);
