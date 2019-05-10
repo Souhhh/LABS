@@ -24,17 +24,19 @@ $coordonnees = get_theme_mod('labs-contact-coord', __(''));
         <!-- contact form -->
         <div class="col-md-6 col-pull">
           <form action="<?= get_admin_url() . '/?action=send-mail'; ?>" method="post" class="form-class" id="con_form">
+          <!-- Cette fonction crée des inputs cachés qui contiennent des informations qui vont nous permettre de savoir si le formulaire est authentique et s'il est bien exécuté via notre site web et pas via une autre source. -->
+          <?php wp_nonce_field('send-mail'); ?>
             <div class="row">
               <div class="col-sm-6">
-                <input type="text" name="name" placeholder="Your name">
+                <input type="text" name="name" id="name" placeholder="Votre nom">
               </div>
               <div class="col-sm-6">
-                <input type="text" name="email" placeholder="Your email">
+                <input type="text" name="email" id="email" placeholder="Votre email">
               </div>
               <div class="col-sm-12">
-                <input type="text" name="subject" placeholder="Subject">
-                <textarea name="message" placeholder="Message"></textarea>
-                <button class="site-btn">send</button>
+                <input type="text" name="subject" id="subject" placeholder="Sujet">
+                <textarea name="message" id="message" placeholder="Message"></textarea>
+                <button class="site-btn">Envoyer</button>
               </div>
             </div>
           </form>
