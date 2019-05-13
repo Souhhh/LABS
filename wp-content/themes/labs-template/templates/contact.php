@@ -23,27 +23,31 @@ $coordonnees = get_theme_mod('labs-contact-coord', __(''));
       </div>
       <!-- contact form -->
       <div class="col-md-6 col-pull">
-      <?php view('partials/notice'); ?>
-      <!-- admin-post.php -->
-        <form action="<?= admin_url('') . '/?action=send-mail'; ?>#mail" method="post" class="form-class" id="con_form">
-        <input type="hidden" name="action" value="send-mail">
-          <!-- Cette fonction crée des inputs cachés qui contiennent des informations qui vont nous permettre de savoir si le formulaire est authentique et s'il est bien exécuté via notre site web et pas via une autre source. -->
-          <?php wp_nonce_field('send-mail'); ?>
-          <div class="row">
-            <div class="col-sm-6">
-              <!-- Lorsqu'on affiche le formulaire sans être passé par les validations, aucune clé old n'a été enregistrée dans la session. Ceci crée une erreur si l'on demande de l'afficher. C'est pour cela que l'on met une condition. On demande de l'afficher que si elle existe. -->
-              <input type="text" name="name" id="name" placeholder="Votre nom" value="<?= isset($old['name']) ? $old['name'] : '' ?>">
-            </div>
-            <div class="col-sm-6">
-              <input type="text" name="email" id="email" placeholder="Votre email" value="<?= isset($old['email']) ? $old['email'] : '' ?>">
-            </div>
-            <div class="col-sm-12">
-              <input type="text" name="subject" id="subject" placeholder="Sujet" value="<?= isset($old['subject']) ? $old['subject'] : '' ?>">
-              <textarea name="message" id="message" placeholder="Message" value="<?= isset($old['message']) ? $old['message'] : '' ?>"></textarea>
-              <button type="submit" class="site-btn">Envoyer</button>
-            </div>
-          </div>
-        </form>
+        <?php view('partials/notice'); ?>
+        <!-- admin-post.php -->
+
+        <div class="row">
+            <form action="<?= admin_url('') . '/?action=send-mail'; ?>#mail" method="post" class="form-class" id="con_form">
+              <input type="hidden" name="action" value="send-mail">
+              <!-- Cette fonction crée des inputs cachés qui contiennent des informations qui vont nous permettre de savoir si le formulaire est authentique et s'il est bien exécuté via notre site web et pas via une autre source. -->
+              <?php wp_nonce_field('send-mail'); ?>
+              <div class="row">
+                <div class="col-sm-6">
+                  <!-- Lorsqu'on affiche le formulaire sans être passé par les validations, aucune clé old n'a été enregistrée dans la session. Ceci crée une erreur si l'on demande de l'afficher. C'est pour cela que l'on met une condition. On demande de l'afficher que si elle existe. -->
+                  <input type="text" name="name" id="name" placeholder="Votre nom" value="<?= isset($old['name']) ? $old['name'] : '' ?>">
+                </div>
+                <div class="col-sm-6">
+                  <input type="text" name="email" id="email" placeholder="Votre email" value="<?= isset($old['email']) ? $old['email'] : '' ?>">
+                </div>
+                <div class="col-sm-12">
+                  <input type="text" name="subject" id="subject" placeholder="Sujet" value="<?= isset($old['subject']) ? $old['subject'] : '' ?>">
+                  <textarea name="message" id="message" placeholder="Message" value="<?= isset($old['message']) ? $old['message'] : '' ?>"></textarea>
+                  <button type="submit" class="site-btn">Envoyer</button>
+                </div>
+              </div>
+            </form>
+          
+        </div>
       </div>
     </div>
   </div>
