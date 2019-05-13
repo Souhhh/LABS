@@ -8,7 +8,7 @@ function simplarity_autoloader($class_name)
     // Si le namespace de la class contien App, alors on rentre dans la fonction 
     if (strpos($class_name, 'App') !== false){
         // __FILE__ correspond au fichier dans lequel on est : 'autoload.php'. La fonction plugin_dir_path retourne le chemin jusqu'au dossier contenant __FILE__. On stock ce chemin dans une variable $classes_dir.
-        $classes_dir = plugin_dir_path(__FILE__);
+        $classes_dir = realpath(plugin_dir_path(__FILE__)) . DIRECTORY_SEPARATOR;
 
         // On modifie la syntaxe de la class name pour passer de "App\Features\PostTypes\ServicesPostType" par "App/Features/PostTypes/ServicesPostType". Voilà ce que fais la combinaison de la fonction strp_replace et de l'argument DIRECTORY_SEPARATOR
         // DIRECTORY_SEPARATOR générera "/" ou "\" selon le système d'exmploitation de la machine.

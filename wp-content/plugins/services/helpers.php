@@ -31,6 +31,14 @@ function extract_data_attr(string $key, array $data)
     return '';
 }
 
+// On crée un helper pour assainir les données avec sanitize text field seulement si l'élément contenu dans $key existe dans le tableau $data
+function post_data($key,$data){
+    if(array_key_exists($key,$data)){
+        return sanitize_text_field($data[$key]);
+    }
+    return '';
+}
+
 // Je crée un helper qui attend deux paramètres que j'ai nommé $post_id et $data et qui sont remplis par la function save du fichier ServicesDetailsMetabox.php
 function update_post_metas($post_id, $data){
     // je fais un foreach pour chaque donnée dans le tableau data. Je veux récupérer la clé et la valeur.
@@ -40,19 +48,13 @@ function update_post_metas($post_id, $data){
     }
 }
 
-// On crée un helper pour assainir les données avec sanitize text field seulement si l'élément contenu dans $key existe dans le tableau $data
-function post_data($key,$data){
-    if(array_key_exists($key,$data)){
-        return sanitize_text_field($data[$key]);
-    }
-    return '';
-}
+
 
 // On crée un helper qui fait plus ou moins comme notre autre helper view mais avec nos function ob_start() et ob_het_clean(). On retourne ce qu'a traité ob_get_clean.
 function mail_template($path,$data = array())
 {
     ob_start();
     extract($data);
-    include(RAT_VIEW_DIR . $path . '.html.php');
+    include(LABS_VIEW_DIR . $path . '.html.php');
     return ob_get_clean();
 }
