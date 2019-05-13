@@ -26,11 +26,10 @@ $coordonnees = get_theme_mod('labs-contact-coord', __(''));
         <?php view('partials/notice'); ?>
         <!-- admin-post.php -->
 
-        <div class="row">
-            <form action="<?= admin_url('') . '/?action=send-mail'; ?>#mail" method="post" class="form-class" id="con_form">
+            <form action="<?= admin_url('admin-post.php'); ?>#mail" method="post" class="form-class" id="con_form">
               <input type="hidden" name="action" value="send-mail">
               <!-- Cette fonction crée des inputs cachés qui contiennent des informations qui vont nous permettre de savoir si le formulaire est authentique et s'il est bien exécuté via notre site web et pas via une autre source. -->
-              <?php wp_nonce_field('send-mail'); ?>
+              <?php /*wp_nonce_field('send-mail');*/ ?>
               <div class="row">
                 <div class="col-sm-6">
                   <!-- Lorsqu'on affiche le formulaire sans être passé par les validations, aucune clé old n'a été enregistrée dans la session. Ceci crée une erreur si l'on demande de l'afficher. C'est pour cela que l'on met une condition. On demande de l'afficher que si elle existe. -->
@@ -46,8 +45,6 @@ $coordonnees = get_theme_mod('labs-contact-coord', __(''));
                 </div>
               </div>
             </form>
-          
-        </div>
       </div>
     </div>
   </div>

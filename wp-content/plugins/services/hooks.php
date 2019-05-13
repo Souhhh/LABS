@@ -11,6 +11,7 @@ use App\Features\MetaBoxes\TeamDetailsMetabox;
 use App\Features\PostTypes\ProjetsPostType;
 use App\Features\MetaBoxes\ProjetsDetailsMetabox;
 
+use App\Database\Database;
 use App\Features\Pages\Page;
 use App\Http\Controllers\MailController;
 use App\Setup;
@@ -39,9 +40,9 @@ add_action('save_post_' . ProjetsPostType::$slug, [ProjetsDetailsMetabox::class,
 
 // add_action pour les MAILS
 add_action('admin_menu', [Page::class, 'init']);
-add_action('admin_action_send-mail', [MailController::class, 'send']);
-add_action('admin_init', [Setup::class, 'start_session']);
+add_action('admin_post_send-mail', [MailController::class, 'send']);
+add_action('init', [Setup::class, 'start_session']);
 
 // Cette fonction ne s'active que lors de l'activation du plugin
-register_activation_hook(__DIR__ . '/services.php', [Database::class], 'init');
+register_activation_hook(__DIR__ . '/services.php', [Database::class, 'init']);
 add_action('admin_enqueue_scripts', [Setup::class, 'enqueue_scripts']);
