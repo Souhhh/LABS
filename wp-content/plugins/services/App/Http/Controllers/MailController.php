@@ -9,17 +9,17 @@ class MailController
     public static function send()
     {
         // On vérifie la sécurité pour voir si le formulaire est bien authentique, que le formulaire est bien celui de notre page.
-        if (!wp_verify_nonce($_POST['_wpnonce'], 'send-mail')) {
+        /*if (!wp_verify_nonce($_POST['_wpnonce'], 'send-mail')) {
             return;
-        };
+        };*/
 
         // Maintenant, à chaque fois qu'il y a une tentative réussie ou ratée d'envoie de mail, on lance la méthode 'validation' de la class Request et on rempli son paramètre avec un tableau de clé et de valeur. On fait en sorte que le nom des clés correspondent aux names des inputs du formulaire.
-        Request::validation([
+        /* Request::validation([
             'name' => 'required',
             'email' => 'email',
             'subject' => 'required',
             'message' => 'required'
-        ]);
+        ]); */
 
 
         // Nous récupérons les données envoyées par le formulaire qui se retrouve dans la variable $_POST
@@ -93,7 +93,6 @@ class MailController
     //     $mail = Mail::find($id);
     //     view('pages/show-mail', compact('mail'));
     // }
-
     // Fonction qui est lancée via le hook admin_action_mail-delete ligne 23 du fichier hooks.php
     public static function delete()
     {
@@ -124,4 +123,3 @@ class MailController
         view('pages/edit-mail', compact('mail'));
     }
 }
-
