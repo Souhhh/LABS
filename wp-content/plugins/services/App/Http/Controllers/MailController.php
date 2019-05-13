@@ -9,17 +9,17 @@ class MailController
     public static function send()
     {
         // On vérifie la sécurité pour voir si le formulaire est bien authentique, que le formulaire est bien celui de notre page.
-        /*if (!wp_verify_nonce($_POST['_wpnonce'], 'send-mail')) {
+        if (!wp_verify_nonce($_POST['_wpnonce'], 'send-mail')) {
             return;
-        };*/
+        };
 
         // Maintenant, à chaque fois qu'il y a une tentative réussie ou ratée d'envoie de mail, on lance la méthode 'validation' de la class Request et on rempli son paramètre avec un tableau de clé et de valeur. On fait en sorte que le nom des clés correspondent aux names des inputs du formulaire.
-        /* Request::validation([
+        Request::validation([
             'name' => 'required',
             'email' => 'email',
             'subject' => 'required',
             'message' => 'required'
-        ]); */
+        ]);
 
 
         // Nous récupérons les données envoyées par le formulaire qui se retrouve dans la variable $_POST
@@ -93,4 +93,35 @@ class MailController
     //     $mail = Mail::find($id);
     //     view('pages/show-mail', compact('mail'));
     // }
+
+    // Fonction qui est lancée via le hook admin_action_mail-delete ligne 23 du fichier hooks.php
+    public static function delete()
+    {
+        // On récupère l'id envoyé via $_POST. notre formulaire ligne 29 dans show-mail.html.php
+        $id = $_POST['id'];
+        // Si notre function delete($id) est lancée, alors on rempli SESSION avec un status et un message positif puis on redirect sur noter page mail-client
+        if (Mail::delete($id)) {
+            $_SESSION['notice'] = [
+                'status' => 'success',
+                'message' => 'Le mail a bien été envoyé'
+            ];
+            wp_safe_redirect(menu_page_url('mail-client'));
+        }
+        // Si le mail n'a pas été supprimé, on renvoie sur la page avec une notification négative
+        else {
+            $_SESSION['notice'] = [
+                'status' => 'error',
+                'message' => 'Un problème est survenu, veuillez rééssayer'
+            ];
+            wp_safe_redirect(wp_get_referer());
+        }
+    }
+    // Fonction qui permet d'aller dans la base de données récupérer le mail dont l'id a été envoyé en POST via le link dans l'url
+    public static function edit()
+    {
+        $id = $_GET['id'];
+        $mail = Mail::find($id);
+        view('pages/edit-mail', compact('mail'));
+    }
 }
+
