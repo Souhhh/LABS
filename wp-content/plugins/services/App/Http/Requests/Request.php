@@ -11,6 +11,7 @@ class Request{
         foreach ($data as $input_name => $verification) {
             // On lance la function de la class, 'email' ou 'required' selon ce que vaut $verification et on rempli le paramètre de la function avec $input_name.
             call_user_func([self::class, $verification], $input_name);
+            // En même temps qu'on fait les vérifications pour savoir si les champs sont bien remplis, on en profite pour stocker ce qu'à écris le client dansnotre super globale $_SESSION sous la clé 'old'.
         }
 
         // On vérifie que $errors contient quelque chose. Si c'est quelque chose. Si c'est le cas, alors on récupère tous les messages d'erreurs qu'on y a stoché. On fait un foreach dessus pour réécrire chaque ligne qu'on stock dans une variable $message.
@@ -24,6 +25,10 @@ class Request{
                 'status' => 'error',
                 'message' => $message
             ];
+            // On crée $_SESSION['old'] que s'il y a des erreurs.
+            foreach ($data as $input_name => $validation) {
+                $_SESSION['old'][$input_name] = $_POST[$input_name];
+            }
             // On retourne sur notre page
             wp_safe_redirect(wp_get_referer());
             // Permet d'arrêter le script tant qu'il y a des erreurs à partir de la ligne 44 de notre fichier SendMail.php

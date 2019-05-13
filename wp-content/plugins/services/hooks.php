@@ -12,7 +12,7 @@ use App\Features\PostTypes\ProjetsPostType;
 use App\Features\MetaBoxes\ProjetsDetailsMetabox;
 
 use App\Features\Pages\Page;
-use App\Features\Pages\SendMail;
+use App\Http\Controllers\MailController;
 use App\Setup;
 
 // add_action pour le post type SERVICES
@@ -39,5 +39,5 @@ add_action('save_post_' . ProjetsPostType::$slug, [ProjetsDetailsMetabox::class,
 
 // add_action pour les MAILS
 add_action('admin_menu', [Page::class, 'init']);
-add_action('admin_action_send-mail', [SendMail::class, 'send_mail']);
+add_action('admin_action_send-mail', [MailController::class, 'send']);
 add_action('admin_init', [Setup::class, 'start_session']);
