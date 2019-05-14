@@ -34,13 +34,15 @@ class Mail
             [
                 'id' => $this->id,
                 'userid' => $this->userid,
-                'name' => $this->name,
+                'lastname' => $this->name,
+                'firstname' => $this->name,
                 'email' => $this->email,
                 'content' => $this->content,
-                'subject' => $this->subject,
+                // 'subject' => $this->subject,
                 'created_at' => $this->created_at
-            ],
-            get_object_vars($this)
+            ]
+            // ,
+            // get_object_vars($this)
             );
     }
     // On crée une function qui récupère tous les mails qui ont été enregistrés dans la base de données. On crée plus haut ligne 16 de ce fichier une variable dans laquelle on stock le nom de la table qui contient les mails. Ce nom de table, on l'avait défini quelques commit plus haut ligne 35 de ce fichier.

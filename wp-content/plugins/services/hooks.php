@@ -45,10 +45,6 @@ add_action('init', [Setup::class, 'start_session']);
 
 // Cette fonction ne s'active que lors de l'activation du plugin
 register_activation_hook(__DIR__ . '/services.php', [Database::class, 'init']);
-<<<<<<< HEAD
 add_action('admin_enqueue_scripts', [Setup::class, 'enqueue_scripts']);
 // Hook personnalisé, c'est la combinaison du hook 'admin_action_' de WordPres avec mail-delete qui est l'action qu'on envoie dans l'url ligne 27 du fichier show-mail.html.php 
 add_action('admin_action_mail-delete', [MailController::class, 'delete']);
-=======
-add_action('admin_enqueue_scripts', [Setup::class, 'enqueue_scripts']);
->>>>>>> 385b8c581cf56d3f5925ad3720c01f1e1b772dd5

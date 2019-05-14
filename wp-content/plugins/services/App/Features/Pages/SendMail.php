@@ -15,7 +15,7 @@ class SendMail
     {
         add_menu_page(
             __('Formulaire pour contacter les clients'),
-            __('Mail Client'),
+            __('Mail Client é'),
             'edit_private_pages',
             'mail-client',
             [self::class, 'render'],
@@ -50,12 +50,12 @@ class SendMail
     //     // On envoi notre variable $old qui contient les anciennes valeurs dans notre view send)mail pour qu'on puisse afficher son contenu dans les champs.
     //     view('pages/send-mail', compact('old', 'mails'));
     // }
-    // /**
-    //  * Affiche une entrée en particulier
-    //  * 
-    //  * @return void
-    //  */
-    // // On entre ici car on clique sur le lien 'voir' donc dans notre url, on a 'action=show' qui s'est rajouté et notre call_user_func a donc fait appel à show() ici même
+    /**
+     * Affiche une entrée en particulier
+     * 
+     * @return void
+     */
+    // On entre ici car on clique sur le lien 'voir' donc dans notre url, on a 'action=show' qui s'est rajouté et notre call_user_func a donc fait appel à show() ici même
     // public static function show()
     // {
     //     // Maintenant qu'on est ici, on a besoin de savoir quel mail est demandé. On va donc dans notre url voir que vaut id= ?? et on le stock dans une variable $id

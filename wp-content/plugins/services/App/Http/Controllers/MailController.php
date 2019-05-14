@@ -9,18 +9,17 @@ class MailController
     public static function send()
     {
         // On vérifie la sécurité pour voir si le formulaire est bien authentique, que le formulaire est bien celui de notre page.
-        /*if (!wp_verify_nonce($_POST['_wpnonce'], 'send-mail')) {
-            return;
-        };*/
+        // if (!wp_verify_nonce($_POST['_wpnonce'], 'send-mail')) {
+        //     return;
+        // };
 
         // Maintenant, à chaque fois qu'il y a une tentative réussie ou ratée d'envoie de mail, on lance la méthode 'validation' de la class Request et on rempli son paramètre avec un tableau de clé et de valeur. On fait en sorte que le nom des clés correspondent aux names des inputs du formulaire.
-        /* Request::validation([
+        Request::validation([
             'name' => 'required',
             'email' => 'email',
             'subject' => 'required',
             'message' => 'required'
-        ]); */
-
+        ]);
 
         // Nous récupérons les données envoyées par le formulaire qui se retrouve dans la variable $_POST
         $name = sanitize_text_field($_POST['name']);
@@ -31,20 +30,23 @@ class MailController
         $header = 'Content-Type: text/html; charset=UTF-8';
 
         // On a remplacé notre pavé par un helper qui le contient et on le stock dans une variable qu'on passe à notre wp_mail.
-        $mail = mail_template('pages/template-mail', compact('name', 'email', 'subject', 'message'));
+        $message_template = mail_template('pages/template-mail', compact('name', 'email', 'subject', 'message'));
 
         $mail = new Mail();
         $mail->userid = get_current_user_id();
+        $mail->id = 1;
         $mail->name = $name;
         $mail->email = $email;
-        $mail->subject = $subject;
-        $mail->content = $message;
-
-        $mail->save();
+        // $mail->subject = $subject;
+        $mail->content = $message;            
+        
+        $test = $mail->save();
+        // echo $test;
+        // exit;
 
         // A chaque fois qu'on lance le formulaire d'envoie de mail, on rajoute dans $_SESSION un tableau notice avec 2 clés et leur valeur.
         // Si le mail est bien envoyé, status = 'success' sinon 'error'.
-        if (wp_mail($email, 'Pour' . $name . ' ', $message, $header)) {
+        if (wp_mail($email, 'Pour' . $name, $message_template, $header)) {
             $_SESSION['notice'] = [
                 'status' => 'success',
                 'message' => 'Votre e-mail a bien été envoyé'
@@ -69,57 +71,20 @@ class MailController
         // La fonction wp_safe_redirect redirige vers une url. La fonction wp_get_referer renvoie vers la page d'où la requête a été envoyée.
         wp_safe_redirect(wp_get_referer());
     }
-    /**
-     * Affiche la page principal
-     */
-    // public static function index()
-    // {
-    //     $mails = array_reverse(Mail::all());
-    //     $old = [];
-    //     if (isset($_SESSION['old']) && ($_SESSION['notice']['status'] == 'error')) { //correction pour afficher valeur que quand error
-    //         $old = $_SESSION['old'];
-    //         unset($_SESSION['old']);
-    //     }
-    //     view('pages/send-mail', compact('old', 'mails'));
-    // }
-    /**
-     * Affiche une entrée en particulier
-     */
-    // public static function show()
-    // {
-    //     //Vérification des permissions
-    //     //    CheckPermission::check('show_email');
-    //     $id = $_GET['id'];
-    //     $mail = Mail::find($id);
-    //     view('pages/show-mail', compact('mail'));
-    // }
-    // Fonction qui est lancée via le hook admin_action_mail-delete ligne 23 du fichier hooks.php
-    public static function delete()
+
+    public static function index()
     {
-        // On récupère l'id envoyé via $_POST. notre formulaire ligne 29 dans show-mail.html.php
-        $id = $_POST['id'];
-        // Si notre function delete($id) est lancée, alors on rempli SESSION avec un status et un message positif puis on redirect sur noter page mail-client
-        if (Mail::delete($id)) {
-            $_SESSION['notice'] = [
-                'status' => 'success',
-                'message' => 'Le mail a bien été envoyé'
-            ];
-            wp_safe_redirect(menu_page_url('mail-client'));
+        // On fait appel à la function all venant de la class Mail et on compact son contenu dans notre view
+        // On va chercher toutes les entrées de la table dont le model mail s'occupe et on inverse l'ordre afin d'avoir le plus récent en premier.
+        $mails = array_reverse(Mail::all());
+        // Si $_SESSION['old] existe, alors on déclare une variable $old dans laquelle son contenu puis on détruit notre globale $_SESSION['old'].
+        if (isset($_SESSION['old'])) {
+            $old = $_SESSION['old'];
+            unset($_SESSION['old']);
         }
-        // Si le mail n'a pas été supprimé, on renvoie sur la page avec une notification négative
-        else {
-            $_SESSION['notice'] = [
-                'status' => 'error',
-                'message' => 'Un problème est survenu, veuillez rééssayer'
-            ];
-            wp_safe_redirect(wp_get_referer());
-        }
-    }
-    // Fonction qui permet d'aller dans la base de données récupérer le mail dont l'id a été envoyé en POST via le link dans l'url
-    public static function edit()
-    {
-        $id = $_GET['id'];
-        $mail = Mail::find($id);
-        view('pages/edit-mail', compact('mail'));
+        // echo count($mails);
+        // exit;
+        // On envoi notre variable $old qui contient les anciennes valeurs dans notre view send)mail pour qu'on puisse afficher son contenu dans les champs.
+        view('pages/send-mail', compact('old', 'mails'));
     }
 }
