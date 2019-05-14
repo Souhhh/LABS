@@ -11,10 +11,10 @@ use App\Features\MetaBoxes\TeamDetailsMetabox;
 use App\Features\PostTypes\ProjetsPostType;
 use App\Features\MetaBoxes\ProjetsDetailsMetabox;
 
-use App\Database\Database;
 use App\Features\Pages\Page;
 use App\Http\Controllers\MailController;
 use App\Setup;
+use App\Database\Database;
 
 // add_action pour le post type SERVICES
 add_action('init', [ServicesPostType::class, 'register']);
@@ -41,10 +41,11 @@ add_action('save_post_' . ProjetsPostType::$slug, [ProjetsDetailsMetabox::class,
 // add_action pour les MAILS
 add_action('admin_menu', [Page::class, 'init']);
 add_action('admin_post_send-mail', [MailController::class, 'send']);
-add_action('init', [Setup::class, 'start_session']);
+add_action('init', [Setup::class, 'start_session']); // Pour ce add_action, on supprime le 'admin_' devant pour que ce soit aussi accessible lorsqu'on est pas connecté au site.
 
 // Cette fonction ne s'active que lors de l'activation du plugin
 register_activation_hook(__DIR__ . '/services.php', [Database::class, 'init']);
 add_action('admin_enqueue_scripts', [Setup::class, 'enqueue_scripts']);
 // Hook personnalisé, c'est la combinaison du hook 'admin_action_' de WordPres avec mail-delete qui est l'action qu'on envoie dans l'url ligne 27 du fichier show-mail.html.php 
 add_action('admin_action_mail-delete', [MailController::class, 'delete']);
+add_action('admin_action_mail-update', [MailController::class, 'update']);

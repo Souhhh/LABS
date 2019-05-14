@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Requests;
+
 class Request{
     // Petite correction : notre variable est renommée de error à errors.
     private static $errors = array();
@@ -11,7 +12,7 @@ class Request{
         foreach ($data as $input_name => $verification) {
             // On lance la function de la class, 'email' ou 'required' selon ce que vaut $verification et on rempli le paramètre de la function avec $input_name.
             call_user_func([self::class, $verification], $input_name);
-            // En même temps qu'on fait les vérifications pour savoir si les champs sont bien remplis, on en profite pour stocker ce qu'à écris le client dansnotre super globale $_SESSION sous la clé 'old'.
+            // En même temps qu'on fait les vérifications pour savoir si les champs sont bien remplis, on en profite pour stocker ce qu'à écris le client dans notre super globale $_SESSION sous la clé 'old'.
         }
 
         // On vérifie que $errors contient quelque chose. Si c'est quelque chose. Si c'est le cas, alors on récupère tous les messages d'erreurs qu'on y a stoché. On fait un foreach dessus pour réécrire chaque ligne qu'on stock dans une variable $message.
@@ -39,13 +40,13 @@ class Request{
     public static function required(string $input_name) {
         if ($_POST[$input_name] == "") {
             // On rempli notre tableau $error avec nos erreurs qu'on écrit ci-dessous
-            self::$errors[$input_name] = sprintf(__('Le champ %s est obligatoire'), $input_name);
+            self::$errors[$input_name] = sprintf(__("Le champ '%s' est obligatoire"), $input_name);
         }
     }
 
     public static function email(string $input_name) {
         if (!is_email($_POST[$input_name])) {
-            self::$errors[$input_name] = sprintf(__('Le champ %s doit être un format email'), $input_name);
+            self::$errors[$input_name] = sprintf(__("Le champ '%s' doit être un format email"), $input_name);
         }
     }
 }

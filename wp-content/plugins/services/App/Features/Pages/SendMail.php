@@ -14,13 +14,13 @@ class SendMail
     public static function init()
     {
         add_menu_page(
-            __('Formulaire pour contacter les clients'),
-            __('Mail Client é'),
-            'edit_private_pages',
-            'mail-client',
-            [self::class, 'render'],
+            __('Mails envoyés via votre site'), // Le titre qui s'affichera sur la page
+            __('Mail Client'), // Le texte dans le menu
+            'edit_private_pages', // La capacité qu'il faut posséder en tant qu'utilisateur pour avoir accès à cette page (les rôles et capacités seront vus plus tard)
+            'mail-client', // Le slug du menu
+            [self::class, 'render'], // La méthode qui va afficher la page
             'dashicons-email-alt',
-            26
+            26 // La position dans le menu 
         );
     }
     /**
@@ -33,36 +33,23 @@ class SendMail
         /**
          * On fait un refactoring afin que la method render renvoie vers la bonne méthode en fonction de l'action
          */
-        // On défini une valeur par défaut pour $action qui est l'index et qui correspondra à la éthode à utiliser (celle qui renvoie la vue avec tous les mails et le formulaire)
+        // On fait appel à la function all venant de la class Mail et on compact son contenu dansnotre view
+        $mails = Mail::all(); 
+        // Si $_SESSION['old] existe, alors on déclare une variable $old dans laquelle son contenu puis on détruit notre globale $_SESSION['old'].
+        if (isset($_SESSION['old'])) {
+            $old = $_SESSION['old'];
+            unset($_SESSION['old']);
+        }
+        view('pages/send-mail', compact('old', 'mails'));
+        // On défini une valeur par défaut pour $action qui est l'index et qui correspondra à la méthode à utiliser (celle qui renvoie la vue avec tous les mails et le formulaire)
         $action = isset($_GET["action"]) ? $_GET["action"] : "index";
         call_user_func([MailController::class, $action]);
     }
-    // public static function index()
-    // {
-    //     // On fait appel à la function all venant de la class Mail et on compact son contenu dans notre view
-    //     // On va chercher toutes les entrées de la table dont le model mail s'occupe et on inverse l'ordre afin d'avoir le plus récent en premier.
-    //     $mails = array_reverse(Mail::all());
-    //     // Si $_SESSION['old] existe, alors on déclare une variable $old dans laquelle son contenu puis on détruit notre globale $_SESSION['old'].
-    //     if (isset($_SESSION['old'])) {
-    //         $old = $_SESSION['old'];
-    //         unset($_SESSION['old']);
-    //     }
-    //     // On envoi notre variable $old qui contient les anciennes valeurs dans notre view send)mail pour qu'on puisse afficher son contenu dans les champs.
-    //     view('pages/send-mail', compact('old', 'mails'));
-    // }
+
     /**
      * Affiche une entrée en particulier
      * 
      * @return void
      */
     // On entre ici car on clique sur le lien 'voir' donc dans notre url, on a 'action=show' qui s'est rajouté et notre call_user_func a donc fait appel à show() ici même
-    // public static function show()
-    // {
-    //     // Maintenant qu'on est ici, on a besoin de savoir quel mail est demandé. On va donc dans notre url voir que vaut id= ?? et on le stock dans une variable $id
-    //     $id = $_GET['id'];
-    //     // On fait appel à notre function find et on passe en paramètre l'id pour que notre function sache l'email à aller chercher dans notre base de données.
-    //     $mail = Mail::find($id);
-    //     // On retourne une vue avec le contenu de Mail. Cette vue n'est pas encore crée. Nous allons la créer au prochain commit. 
-    //     view('pages/show-mail', compact('mail'));
-    // }
 }

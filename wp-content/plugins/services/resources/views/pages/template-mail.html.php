@@ -1,3 +1,5 @@
+
+<!-- Cette page se charge de la structure du mail qu'on recoit sur MailTrap. -->
 <!DOCTYPE html>
 <html lang="en">
 

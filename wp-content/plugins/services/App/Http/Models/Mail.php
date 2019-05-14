@@ -34,8 +34,8 @@ class Mail
             [
                 'id' => $this->id,
                 'userid' => $this->userid,
-                'lastname' => $this->name,
-                'firstname' => $this->name,
+                'lastname' => $this->lastname,
+                'firstname' => $this->firstname,
                 'email' => $this->email,
                 'content' => $this->content,
                 // 'subject' => $this->subject,
@@ -66,7 +66,15 @@ class Mail
         }
         return $mail;
     }
-
+    public function update()
+    {
+        global $wpdb;
+        return $wpdb->update(
+            self::$table,
+            get_object_vars($this),
+            ['id' => $this->id]
+        );
+    }
 
     // Fonction qui va nous permettre de supprimer un mail dans la base de données. Cette function attend un paramètre '$id' que l'on va remplir par la suite quand on va appeler cette function.
     public static function delete($id)
