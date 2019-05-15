@@ -31,6 +31,10 @@ $coordonnees = get_theme_mod('labs-contact-coord', __(''));
           <!-- Cette fonction crée des inputs cachés qui contiennent des informations qui vont nous permettre de savoir si le formulaire est authentique et s'il est bien exécuté via notre site web et pas via une autre source. -->
           <?php wp_nonce_field('send-mail'); ?>
           <div class="row">
+            <?php if (isset($_SESSION['old'])) {
+              $old = $_SESSION['old'];
+              unset($_SESSION['old']);
+            } ?>
             <div class="col-sm-6">
               <!-- Lorsqu'on affiche le formulaire sans être passé par les validations, aucune clé old n'a été enregistrée dans la session. Ceci crée une erreur si l'on demande de l'afficher. C'est pour cela que l'on met une condition. On demande de l'afficher que si elle existe. -->
               <input type="text" name="nom" id="nom" placeholder="Votre nom" value="<?= isset($old['nom']) ? $old['nom'] : '' ?>">

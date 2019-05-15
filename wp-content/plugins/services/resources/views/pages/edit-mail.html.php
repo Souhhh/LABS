@@ -19,17 +19,17 @@
                         </div>
                         <div class="form-group">
                             <label for="name">Nom</label>
-                            <input type="text" class="form-control" id="name" name="name" value="<?= $mail->name; ?>">
+                            <input type="text" class="form-control" id="lastname" name="lastname" value="<?= $mail->lastname; ?>">
                         </div>
                         <div class="form-group">
                             <label for="subject">Objet</label>
-                            <input type="text" class="form-control" id="subject" name="subject" value="<?= $mail->subject; ?>">
+                            <input type="text" class="form-control" id="subject" name="subject" value="<?= $mail->firstname; ?>">
                         </div>
                         <div class="form-group">
                             <label for="content">Message</label>
-                            <textarea class="form-control" name="content" id="content" rows="3"><?= $mail->id; ?></textarea>
+                            <textarea class="form-control" name="content" id="content" rows="3"><?= $mail->content; ?></textarea>
                         </div>
-                        <a href="<?php menu_page_url('mail-client'); ?>&action=show&id=?= $mail->id; ?>" class="button button-primary">retour</a>
+                        <a href="<?php menu_page_url('mail-client'); ?>&action=show&id=<?= $mail->id; ?>" class="button button-primary">retour</a>
                         <button type="submit" class="button">enregistrer</button>
                     </form>
                 </div>

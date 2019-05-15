@@ -6,10 +6,10 @@ class Mail
     // Les propriétés de l'objet model. Les propriétés de l'objet qui sont représentatives de la structure de la table dans la base de données.
     public $id;
     public $userid;
-    public $name;
+    public $lastname;
     public $email;
     public $content;
-    public $subject;
+    public $firstname;
     public $created_at;
     protected static $table = 'mg_labs_mail';
     /**

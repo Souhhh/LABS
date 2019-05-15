@@ -33,14 +33,16 @@ class SendMail
         /**
          * On fait un refactoring afin que la method render renvoie vers la bonne méthode en fonction de l'action
          */
-        // On fait appel à la function all venant de la class Mail et on compact son contenu dansnotre view
+        // On fait appel à la function all venant de la class Mail et on compact son contenu dans notre view
+        
         $mails = Mail::all(); 
+        // Le OLD ici ne sert à rien, il ne fonctionne pas !!!
         // Si $_SESSION['old] existe, alors on déclare une variable $old dans laquelle son contenu puis on détruit notre globale $_SESSION['old'].
-        if (isset($_SESSION['old'])) {
-            $old = $_SESSION['old'];
-            unset($_SESSION['old']);
-        }
-        view('pages/send-mail', compact('old', 'mails'));
+        // if (isset($_SESSION['old'])) {
+        //     $old = $_SESSION['old'];
+        //     unset($_SESSION['old']);
+        // }
+        // view('pages/send-mail', compact('old', 'mails'));
         // On défini une valeur par défaut pour $action qui est l'index et qui correspondra à la méthode à utiliser (celle qui renvoie la vue avec tous les mails et le formulaire)
         $action = isset($_GET["action"]) ? $_GET["action"] : "index";
         call_user_func([MailController::class, $action]);

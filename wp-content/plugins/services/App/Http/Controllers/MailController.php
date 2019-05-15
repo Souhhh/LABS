@@ -14,6 +14,9 @@ class MailController
         // };
 
         // Maintenant, à chaque fois qu'il y a une tentative réussie ou ratée d'envoie de mail, on lance la méthode 'validation' de la class Request et on rempli son paramètre avec un tableau de clé et de valeur. On fait en sorte que le nom des clés correspondent aux names des inputs du formulaire.
+        if (!wp_verify_nonce($_POST['_wpnonce'], 'send-mail')) {
+            return;
+        };
         Request::validation([
             'nom' => 'required',
             'email' => 'email',
@@ -34,10 +37,10 @@ class MailController
 
         $mail = new Mail();
         $mail->userid = get_current_user_id();
-        $mail->nom = $firstname;
+        $mail->firstname = $firstname;
         $mail->email = $email;
-        $mail->objet = $lastname;
-        $mail->message = $content;
+        $mail->lastname = $lastname;
+        $mail->content = $content;
         // Sauvegarde du mail dans la base de données
         $mail->save();
         // echo $test;
@@ -66,9 +69,9 @@ class MailController
         // On rajoute $header en 5ime paramètre 
         // On change $message par $mail. Cela veut dire qu'on envoie plus message dans le contenu du mail mais ce qui est retourné par $mail c'est-à-dire le contenu de notre page template-mail.html.php 
 
-        if (!wp_verify_nonce($_POST['_wpnonce'], 'send-mail')) {
-            return;
-        };
+        // if (!wp_verify_nonce($_POST['_wpnonce'], 'send-mail')) {
+        //     return;
+        // };
         // La fonction wp_safe_redirect redirige vers une url. La fonction wp_get_referer renvoie vers la page d'où la requête a été envoyée.
         wp_safe_redirect(wp_get_referer());
     }
@@ -78,13 +81,23 @@ class MailController
         // On fait appel à la function all venant de la class Mail et on compact son contenu dans notre view
         // On va chercher toutes les entrées de la table dont le model mail s'occupe et on inverse l'ordre afin d'avoir le plus récent en premier.
         $mails = array_reverse(Mail::all());
-        // Si $_SESSION['old] existe, alors on déclare une variable $old dans laquelle son contenu puis on détruit notre globale $_SESSION['old'].
-        if (isset($_SESSION['old'])) {
+
+        // Rajout de chez G
+        $old = [];
+        if (isset($_SESSION['old']) && ($_SESSION['notice']['status'] == 'error')) {
             $old = $_SESSION['old'];
             unset($_SESSION['old']);
         }
+        // Le OLD ici ne sert à rien, il ne fonctionne pas !!!
+        // Si $_SESSION['old] existe, alors on déclare une variable $old dans laquelle son contenu puis on détruit notre globale $_SESSION['old'].
+        // if (isset($_SESSION['old'])) {
+        //     $old = $_SESSION['old'];
+        //     unset($_SESSION['old']);
+        // }
+
         // echo count($mails);
         // exit;
+
         // On envoi notre variable $old qui contient les anciennes valeurs dans notre view send)mail pour qu'on puisse afficher son contenu dans les champs.
         view('pages/send-mail', compact('old', 'mails'));
     }
@@ -102,6 +115,54 @@ class MailController
         // On retourne une vue avec le contenu de Mail. Cette vue n'est pas encore crée. A présent, la vue existe et donc on peut y utiliser la variable mail qu'on compact.
         view('pages/show-mail', compact('mail'));
     }
+    // Fonction qui permet d'aller dans la base de données récupérer le mail dont l'id a été envoyé en POST via le link dans l'url
+    public static function edit()
+    {
+        $id = $_GET['id'];
+        $mail = Mail::find($id);
+        view('pages/edit-mail', compact('mail'));
+    }
+
+
+    // On récupère les données du formulaire d'update avec une vérification du none, et les validations. Ensuite, on va chercher toutes les données passées dans $_POST par notre formulaire, on y applique un sanitize sur chaque donnée. Ensuite, on lance la function update() qui vient de notre model Mail.php
+    public static function update()
+    {
+        // On vérifie la sécurité pour voir si le formualire est bien authentique
+        if (!wp_verify_nonce($_POST['_wpnonce'], 'edit-mail')) {
+            return;
+        };
+        // on vérifie les valeurs
+        Request::validation([
+            'lastname' => 'required',
+            'email' => 'email',
+            'subject' => 'required',
+            'content' => 'required'
+        ]);
+        // on récupère le mail original de la base de donnée
+        $mail = Mail::find($_POST['id']);
+        // On met à jour les nouvelles valeurs
+
+        $mail->userid = get_current_user_id();
+        $mail->lastname = sanitize_text_field($_POST['lastname']);
+        $mail->firstname = sanitize_text_field($_POST['subject']);
+        $mail->email = sanitize_email($_POST['email']);
+        $mail->content = sanitize_textarea_field($_POST['content']);
+        // On met à jour dans la base de donnée et on renvoi une notification
+        // $mail->update();
+        if ($mail->update()) {
+            $_SESSION['notice'] = [
+                'status' => 'success',
+                'message' => 'Votre e-mail a bien été modifié'
+            ];
+        } else {
+            $_SESSION['notice'] = [
+                'status' => 'error',
+                'message' => 'Une erreur est survenue, veuillez réessayer plus tard'
+            ];
+        }
+        wp_safe_redirect(wp_get_referer());
+    }
+
     // Fonction qui est lancée via le hook admin_action_mail-delete ligne 23 du fichier hooks.php
     public static function delete()
     {
@@ -123,49 +184,5 @@ class MailController
             ];
             wp_safe_redirect(wp_get_referer());
         }
-    }
-    // Fonction qui permet d'aller dans la base de données récupérer le mail dont l'id a été envoyé en POST via le link dans l'url
-    public static function edit()
-    {
-        $id = $_GET['id'];
-        $mail = Mail::find($id);
-        view('pages/edit-mail', compact('mail'));
-    }
-    // On récupère les données du formulaire d'update avec une vérification du none, et les validations. Ensuite, on va chercher toutes les données passées dans $_POST par notre formulaire, on y applique un sanitize sur chaque donnée. Ensuite, on lance la function update() qui vient de notre model Mail.php
-    public static function update()
-    {
-        // On vérifie la sécurité pour voir si le formualire est bien authentique
-        if (!wp_verify_nonce($_POST['_wpnonce'], 'edit-mail')) {
-            return;
-        };
-        // on vérifie les valeurs
-        Request::validation([
-            'lastname' => 'required',
-            'email' => 'email',
-            'firstname' => 'required',
-            'content' => 'required'
-        ]);
-        // on récupère le mail original de la base de donnée
-        $mail = Mail::find($_POST['id']);
-        // On met à jour les nouvelles valeurs
-        $mail->userid = get_current_user_id();
-        $mail->lastname = sanitize_text_field($_POST['lastname']);
-        $mail->firstname = sanitize_text_field($_POST['firstname']);
-        $mail->email = sanitize_email($_POST['email']);
-        $mail->content = sanitize_textarea_field($_POST['content']);
-        // On met à jour dans la base de donnée et on renvoi une notification
-        $mail->update();
-        if ($mail->update()) {
-            $_SESSION['notice'] = [
-                'status' => 'success',
-                'message' => 'Votre e-mail a bien été modifié'
-            ];
-        } else {
-            $_SESSION['notice'] = [
-                'status' => 'error',
-                'message' => 'Une erreur est survenue, veuillez réessayer plus tard'
-            ];
-        }
-        wp_safe_redirect(wp_get_referer());
     }
 }

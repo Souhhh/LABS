@@ -12,7 +12,7 @@
                         <strong>E-mail: </strong> <?= $mail->email; ?>
                     </div>
                     <div>
-                        <strong>Nom: </strong> <?= $mail->name; ?>
+                        <strong>Nom: </strong> <?= $mail->firstname; ?>
                     </div>
                     <div>
                         <strong>Message: </strong> <?= $mail->content; ?>
