@@ -18,12 +18,12 @@
                             <input type="email" class="form-control" id="email" name="email" value="<?= $mail->email; ?>">
                         </div>
                         <div class="form-group">
-                            <label for="name">Nom</label>
-                            <input type="text" class="form-control" id="lastname" name="lastname" value="<?= $mail->lastname; ?>">
+                            <label for="firstname">Nom</label>
+                            <input type="text" class="form-control" id="firstname" name="firstname" value="<?= $mail->firstname; ?>">
                         </div>
                         <div class="form-group">
-                            <label for="subject">Objet</label>
-                            <input type="text" class="form-control" id="subject" name="subject" value="<?= $mail->firstname; ?>">
+                            <label for="lastname">Objet</label>
+                            <input type="text" class="form-control" id="lastname" name="lastname" value="<?= $mail->lastname; ?>">
                         </div>
                         <div class="form-group">
                             <label for="content">Message</label>

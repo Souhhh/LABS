@@ -1,3 +1,5 @@
+<!-- Page qui se charge de l'affichage du récapitulatif du mail quand on clique sur le bouton 'voir'. -->
+
 <div class="wrap">
     <!-- Nous utilisons la function get_admin_page_title() pour récupérer le titre de la page admin que l'on a défni lors de l'enregistrement. -->
     <h1><?= get_admin_page_title(); ?></h1>
@@ -15,6 +17,9 @@
                         <strong>Nom: </strong> <?= $mail->firstname; ?>
                     </div>
                     <div>
+                        <strong>Objet: </strong> <?= $mail->lastname; ?>
+                    </div>
+                    <div>
                         <strong>Message: </strong> <?= $mail->content; ?>
                     </div>
                 </div>
@@ -29,7 +34,7 @@
             <form class="form-inline d-inline-block" action="<?php get_site_url(); ?>?action=mail-delete" method="post">
                 <!-- On met un input hidden avec comme valeur l'id du mail en question. On fait ça pour ensuite récupérer l'id via $_POST['et le NAME qui est ici "id"']. On récupérera sa valeur dans les prochains commits. Pour l'instant, on a uniquement un petit formulaire qui contient l'id du mail et qui nous met une action=delete dans notre url. -->
                 <input type="hidden" name="id" value="<?= $mail->id; ?>">
-                <button type="submit" class="button">supprimer</button>
+                <button type="submit" class="button bg-danger">supprimer</button>
             </form>
         </div>
     </div>

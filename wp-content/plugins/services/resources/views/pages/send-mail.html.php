@@ -1,3 +1,5 @@
+<!-- Page qui se charge de l'affichage de la liste des emails envoyés depuis le site (le récupitulatif des emails). -->
+
 <div class="wrap">
     <!-- Nous utilisons cette fonction pour récupérer le titre de la page admin que l'on a défni lors de l'enregistrement. -->
     <h1><?= get_admin_page_title(); ?></h1>

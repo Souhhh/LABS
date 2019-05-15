@@ -113,8 +113,11 @@ class MailController
         // On fait appel à notre function find et on passe en paramètre l'id pour que notre function sache l'email à aller chercher dans notre base de données.
         $mail = Mail::find($id);
         // On retourne une vue avec le contenu de Mail. Cette vue n'est pas encore crée. A présent, la vue existe et donc on peut y utiliser la variable mail qu'on compact.
+        // Ce view, c'est pour l'affichage du récapitulatif du mail quand on clique sur 'voir'.
         view('pages/show-mail', compact('mail'));
     }
+
+
     // Fonction qui permet d'aller dans la base de données récupérer le mail dont l'id a été envoyé en POST via le link dans l'url
     public static function edit()
     {
@@ -135,7 +138,7 @@ class MailController
         Request::validation([
             'lastname' => 'required',
             'email' => 'email',
-            'subject' => 'required',
+            'firstname' => 'required',
             'content' => 'required'
         ]);
         // on récupère le mail original de la base de donnée
@@ -143,10 +146,10 @@ class MailController
         // On met à jour les nouvelles valeurs
 
         $mail->userid = get_current_user_id();
-        $mail->lastname = sanitize_text_field($_POST['lastname']);
-        $mail->firstname = sanitize_text_field($_POST['subject']);
+        $mail->lastname = sanitize_text_field($_POST['objet']);
+        $mail->firstname = sanitize_text_field($_POST['nom']);
         $mail->email = sanitize_email($_POST['email']);
-        $mail->content = sanitize_textarea_field($_POST['content']);
+        $mail->content = sanitize_textarea_field($_POST['message']);
         // On met à jour dans la base de donnée et on renvoi une notification
         // $mail->update();
         if ($mail->update()) {

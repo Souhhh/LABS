@@ -1,5 +1,5 @@
 
-<!-- Cette page se charge de la structure du mail qu'on recoit sur MailTrap. -->
+<!-- Page qui se charge de la structure du mail qu'on recoit sur MailTrap. -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,10 +36,10 @@
 <body>
     <section class="container">
         <h1>
-            Bonjour <?= $name ?>
+            Bonjour <?= $firstname ?>
         </h1>
         <p>
-            <?= $message ?>
+            <?= $content ?>
         </p>
     </section>
 </body>
