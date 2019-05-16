@@ -71,6 +71,8 @@ class Mail
         }
         return $mail;
     }
+
+
     public function update()
     {
         global $wpdb;
@@ -81,6 +83,7 @@ class Mail
         );
     }
 
+    
     // Fonction qui va nous permettre de supprimer un mail dans la base de données. Cette function attend un paramètre '$id' que l'on va remplir par la suite quand on va appeler cette function.
     public static function delete($id)
     {

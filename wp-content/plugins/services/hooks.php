@@ -18,8 +18,8 @@ use App\Database\Database;
 use App\Features\Pages\SendMail;
 
 // use pour la Newsletter
-use App\Features\Pages\SendNewsletter;
-use App\Http\Controllers\NewsletterController;
+use App\Features\Pages\Newsletter;
+use App\Http\Controllers\NewsController;
 
 
 
@@ -60,9 +60,9 @@ add_action('admin_action_mail-update', [MailController::class, 'update']);
 
 // add_action pour la NEWSLETTER
 // Ajout d'un add_action pour l'envoie de mail depuis l'admin
-add_action('admin_post_add_send-newsletter', [NewsletterController::class, 'send']);
-add_action('admin_post_nopriv_add_send-newsletter', [NewsletterController::class, 'send']);
+add_action('admin_action_send-news', [NewsController::class, 'send']);
+// add_action('admin_post_nopriv_add_send-newsletter', [NewsletterController::class, 'send']);
 // Ajout d'un add_action pour la suppression d'un mail depuis l'admin
-add_action('admin_action_newsletter-delete', [NewsletterController::class, 'delete']);
+add_action('admin_action_news-delete', [NewsController::class, 'delete']);
 // Ajout d'un add_action pour éditer un mail
-add_action('admin_action_newsletter-update', [NewsletterController::class, 'update']);
+add_action('admin_action_news-update', [NewsController::class, 'update']); 

@@ -1,7 +1,8 @@
 <?php
 namespace App\Database;
+
 use App\Database\Migrations\CreateMailTable;
-use App\Database\Migrations\CreateNewsletterTable;
+use App\Database\Migrations\CreateNewsTable;
 
 class Database
 {
@@ -23,6 +24,6 @@ class Database
     public static function migration()
     {
         CreateMailTable::up();
-        CreateNewsletterTable::up();
+        CreateNewsTable::up();
     }
 }

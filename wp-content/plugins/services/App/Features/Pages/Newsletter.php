@@ -1,9 +1,10 @@
 <?php
 namespace App\Features\Pages;
 
-use App\Http\Controllers\NewsletterController;
+use App\Http\Models\News;
+use App\Http\Controllers\NewsController;
 
-class SendNewsletter
+class Newsletter
 {
     /**
      * Initialisation de la page.
@@ -13,10 +14,10 @@ class SendNewsletter
     public static function init()
     {
         add_menu_page(
-            __("Personnes s'étant abonnées à la newsletter"),
+            __("Personnes abonnées à la newsletter"),
             __('Newsletter'),
             'edit_private_pages',
-            'newsletter',
+            'news-letter',
             [self::class, 'render'],
             'dashicons-email',
             26
@@ -27,8 +28,9 @@ class SendNewsletter
      * 
      * @return void
      */
-    public static function render()
+    public static function render() 
     {
-        $action = isset($_GET["action"]) ? $_GET["action"] : "index"; call_user_func([NewsletterController::class, $action]);
+        $action = isset($_GET["action"]) ? $_GET["action"] : "index"; 
+        call_user_func([NewsController::class, $action]);
     }
 }

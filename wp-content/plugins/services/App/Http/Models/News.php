@@ -1,14 +1,13 @@
 <?php
 namespace App\Http\Models;
 
-class Newsletter
+class News
 {
     public $id;
-    // public $userid;
     public $email;
     public $created_at;
     
-    protected static $table = 'mg_labs_newsletter';
+    protected static $table = 'mg_labs_news';
     /**
      * Fonction qui est appelée lors de l'instance d'un objet.
      */
@@ -26,12 +25,11 @@ class Newsletter
     {
         global $wpdb;
         return $wpdb->insert(
-            $wpdb->prefix . 'labs_newsletter',
+            $wpdb->prefix . 'labs_news',
             [
                 'id' => $this->id,
-                // 'userid' => $this->userid,
                 'email' => $this->email,
-                'created_at' => $this->created_at
+                'created_at' => $this->created_at,
             ],
             get_object_vars($this)
         );
@@ -57,7 +55,7 @@ class Newsletter
 
         // Nous ajoutons ces lignes afin de ne pas renvoyer un simple objet maus bien un objet Mail
         $object = $wpdb->get_row($query);
-        $news = new Newsletter();
+        $news = new News();
         foreach ($object as $key => $value) {
             $news->$key = $value;
         }
@@ -76,6 +74,7 @@ class Newsletter
             ['id' => $this->id]
         );
     }
+    
     public static function delete($id)
     {
         global $wpdb;

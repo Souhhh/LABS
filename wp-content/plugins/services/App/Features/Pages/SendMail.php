@@ -47,11 +47,4 @@ class SendMail
         $action = isset($_GET["action"]) ? $_GET["action"] : "index";
         call_user_func([MailController::class, $action]);
     }
-
-    /**
-     * Affiche une entrée en particulier
-     * 
-     * @return void
-     */
-    // On entre ici car on clique sur le lien 'voir' donc dans notre url, on a 'action=show' qui s'est rajouté et notre call_user_func a donc fait appel à show() ici même
 }
