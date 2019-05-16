@@ -15,6 +15,13 @@ use App\Features\Pages\Page;
 use App\Http\Controllers\MailController;
 use App\Setup;
 use App\Database\Database;
+use App\Features\Pages\SendMail;
+
+// use pour la Newsletter
+use App\Features\Pages\SendNewsletter;
+use App\Http\Controllers\NewsletterController;
+
+
 
 // add_action pour le post type SERVICES
 add_action('init', [ServicesPostType::class, 'register']);
@@ -49,3 +56,13 @@ add_action('admin_enqueue_scripts', [Setup::class, 'enqueue_scripts']);
 // Hook personnalisé, c'est la combinaison du hook 'admin_action_' de WordPres avec mail-delete qui est l'action qu'on envoie dans l'url ligne 27 du fichier show-mail.html.php 
 add_action('admin_action_mail-delete', [MailController::class, 'delete']);
 add_action('admin_action_mail-update', [MailController::class, 'update']);
+
+
+// add_action pour la NEWSLETTER
+// Ajout d'un add_action pour l'envoie de mail depuis l'admin
+add_action('admin_post_add_send-newsletter', [NewsletterController::class, 'send']);
+add_action('admin_post_nopriv_add_send-newsletter', [NewsletterController::class, 'send']);
+// Ajout d'un add_action pour la suppression d'un mail depuis l'admin
+add_action('admin_action_newsletter-delete', [NewsletterController::class, 'delete']);
+// Ajout d'un add_action pour éditer un mail
+add_action('admin_action_newsletter-update', [NewsletterController::class, 'update']);
