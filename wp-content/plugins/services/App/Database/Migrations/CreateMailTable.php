@@ -20,9 +20,9 @@ class CreateMailTable
         $wpdb->query("CREATE TABLE IF NOT EXISTS  $table_name  (
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
             userid INT NOT NULL,
-            lastname VARCHAR(255) NOT NULL,
-            firstname VARCHAR(255) NOT NULL,
+            name VARCHAR(255) NOT NULL,
             email VARCHAR(255) NOT NULL,
+            subject VARCHAR(255) NOT NULL,
             content TEXT NOT NULL,
             created_at TIMESTAMP
           )

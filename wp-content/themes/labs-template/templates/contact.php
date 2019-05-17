@@ -37,14 +37,15 @@ $coordonnees = get_theme_mod('labs-contact-coord', __(''));
             } ?>
             <div class="col-sm-6">
               <!-- Lorsqu'on affiche le formulaire sans être passé par les validations, aucune clé old n'a été enregistrée dans la session. Ceci crée une erreur si l'on demande de l'afficher. C'est pour cela que l'on met une condition. On demande de l'afficher que si elle existe. -->
-              <input type="text" name="nom" id="nom" placeholder="Votre nom" value="<?= isset($old['nom']) ? $old['nom'] : '' ?>">
+              <!-- C'est surtout le name qui doit être exactement le même que de l'autre côté (avec le $_POST). -->
+              <input type="text" name="name" id="name" placeholder="Votre nom" value="<?= isset($old['name']) ? $old['name'] : '' ?>">
             </div>
             <div class="col-sm-6">
               <input type="text" name="email" id="email" placeholder="Votre email" value="<?= isset($old['email']) ? $old['email'] : '' ?>">
             </div>
             <div class="col-sm-12">
-              <input type="text" name="objet" id="objet" placeholder="Objet" value="<?= isset($old['objet']) ? $old['objet'] : '' ?>">
-              <textarea name="message" id="message" placeholder="Message" cols="30" rows="10"><?= isset($old['message']) ? $old['message'] : '' ?></textarea>
+              <input type="text" name="subject" id="subject" placeholder="Objet" value="<?= isset($old['subject']) ? $old['subject'] : '' ?>">
+              <textarea name="content" id="content" placeholder="Message" cols="30" rows="10"><?= isset($old['content']) ? $old['content'] : '' ?></textarea>
               <button type="submit" class="site-btn">Envoyer</button>
             </div>
           </div>

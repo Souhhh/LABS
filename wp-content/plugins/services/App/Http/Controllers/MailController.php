@@ -18,37 +18,39 @@ class MailController
             return;
         };
         Request::validation([
-            'nom' => 'required',
+            // Ils doivent avoir le même nom que ceux du formulaire.
+            'name' => 'required',
             'email' => 'email',
-            'objet' => 'required',
-            'message' => 'required'
+            'subject' => 'required',
+            'content' => 'required'
         ]);
 
         // Nous récupérons les données envoyées par le formulaire qui se retrouve dans la variable $_POST
-        $firstname = sanitize_text_field($_POST['nom']);
+        // Les éléments entre crochets doivent avoir le même nom que ceux qu'on met dans notre formulaire. 
+        $name = sanitize_text_field($_POST['name']);
         $email = sanitize_email($_POST['email']);
-        $lastname = sanitize_text_field($_POST['objet']);
-        $content = sanitize_textarea_field($_POST['message']);
+        $subject = sanitize_text_field($_POST['subject']);
+        $content = sanitize_textarea_field($_POST['content']);
 
         $header = 'Content-Type: text/html; charset=UTF-8';
 
         // On a remplacé notre pavé par un helper qui le contient et on le stock dans une variable qu'on passe à notre wp_mail.
-        $message_template = mail_template('pages/template-mail', compact('nom', 'email', 'objet', 'message'));
+        $message_template = mail_template('pages/template-mail', compact('name', 'content'));
 
         $mail = new Mail();
         $mail->userid = get_current_user_id();
-        $mail->firstname = $firstname;
+        $mail->name = $name;
         $mail->email = $email;
-        $mail->lastname = $lastname;
+        $mail->subject = $subject;
         $mail->content = $content;
+        //exit($content);
+
         // Sauvegarde du mail dans la base de données
         $mail->save();
-        // echo $test;
-        // exit;
 
         // A chaque fois qu'on lance le formulaire d'envoie de mail, on rajoute dans $_SESSION un tableau notice avec 2 clés et leur valeur.
         // Si le mail est bien envoyé, status = 'success' sinon 'error'.
-        if (wp_mail($email, 'Pour ' . $firstname, $message_template, $header)) {
+        if (wp_mail($email, 'Pour ' . $name, $message_template, $header)) {
             $_SESSION['notice'] = [
                 'status' => 'success',
                 'message' => 'Votre e-mail a bien été envoyé'
@@ -76,33 +78,26 @@ class MailController
         wp_safe_redirect(wp_get_referer());
     }
 
+    // Fonction qui récupère la liste de tous les mails et les afficher.
     public static function index()
     {
         // On fait appel à la function all venant de la class Mail et on compact son contenu dans notre view
         // On va chercher toutes les entrées de la table dont le model mail s'occupe et on inverse l'ordre afin d'avoir le plus récent en premier.
         $mails = array_reverse(Mail::all());
 
-        // Rajout de chez G
         $old = [];
         if (isset($_SESSION['old']) && ($_SESSION['notice']['status'] == 'error')) {
             $old = $_SESSION['old'];
             unset($_SESSION['old']);
         }
-        // Le OLD ici ne sert à rien, il ne fonctionne pas !!!
-        // Si $_SESSION['old] existe, alors on déclare une variable $old dans laquelle son contenu puis on détruit notre globale $_SESSION['old'].
-        // if (isset($_SESSION['old'])) {
-        //     $old = $_SESSION['old'];
-        //     unset($_SESSION['old']);
-        // }
-
-        // echo count($mails);
-        // exit;
 
         // On envoi notre variable $old qui contient les anciennes valeurs dans notre view send)mail pour qu'on puisse afficher son contenu dans les champs.
         view('pages/send-mail', compact('old', 'mails'));
     }
+
+
     /**
-     * Affiche une entrée en particulier
+     * Affiche le récapitulatif quand on clique sur le bouton 'voir'.
      * 
      * @return void
      */
@@ -127,7 +122,7 @@ class MailController
     }
 
 
-    // On récupère les données du formulaire d'update avec une vérification du none, et les validations. Ensuite, on va chercher toutes les données passées dans $_POST par notre formulaire, on y applique un sanitize sur chaque donnée. Ensuite, on lance la function update() qui vient de notre model Mail.php
+    // On récupère les données du formulaire d'update avec une vérification du none et les validations. Ensuite, on va chercher toutes les données passées dans $_POST par notre formulaire, on y applique un sanitize sur chaque donnée. Ensuite, on lance la function update() qui vient de notre model Mail.php
     public static function update()
     {
         // On vérifie la sécurité pour voir si le formualire est bien authentique
@@ -136,9 +131,9 @@ class MailController
         };
         // on vérifie les valeurs
         Request::validation([
-            'lastname' => 'required',
+            'name' => 'required',
             'email' => 'email',
-            'firstname' => 'required',
+            'subject' => 'required',
             'content' => 'required'
         ]);
         // on récupère le mail original de la base de donnée
@@ -146,10 +141,10 @@ class MailController
         // On met à jour les nouvelles valeurs
 
         $mail->userid = get_current_user_id();
-        $mail->lastname = sanitize_text_field($_POST['objet']);
-        $mail->firstname = sanitize_text_field($_POST['nom']);
+        $mail->name = sanitize_text_field($_POST['name']);
+        $mail->subject = sanitize_text_field($_POST['subject']);
         $mail->email = sanitize_email($_POST['email']);
-        $mail->content = sanitize_textarea_field($_POST['message']);
+        $mail->content = sanitize_textarea_field($_POST['content']);
         // On met à jour dans la base de donnée et on renvoi une notification
         // $mail->update();
         if ($mail->update()) {

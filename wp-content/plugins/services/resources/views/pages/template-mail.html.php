@@ -36,7 +36,7 @@
 <body>
     <section class="container">
         <h1>
-            Bonjour <?= $firstname ?>
+            Bonjour <?= $name ?>
         </h1>
         <p>
             <?= $content ?>

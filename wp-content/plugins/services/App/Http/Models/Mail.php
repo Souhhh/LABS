@@ -6,10 +6,10 @@ class Mail
     // Les propriétés de l'objet model. Les propriétés de l'objet qui sont représentatives de la structure de la table dans la base de données.
     public $id;
     public $userid;
-    public $lastname;
+    public $name;
     public $email;
+    public $subject;
     public $content;
-    public $firstname;
     public $created_at;
     protected static $table = 'mg_labs_mail';
     /**
@@ -31,20 +31,21 @@ class Mail
         // Nous utilisons à nouveau la méthode insert de l'objet $wpdb;
         return $wpdb->insert(
             $wpdb->prefix . 'labs_mail',
-            [
+            [ // La première colonne doit reprendre exactement les mêmes noms que ceux qu'on a mis dans notre table lors de sa création.
+            // La deuxième colonne doit reprendre les propriétés (les noms) de la class du dessus (donc ici la class Mail) car il y a le 'this'.
                 'id' => $this->id,
                 'userid' => $this->userid,
-                'lastname' => $this->lastname,
-                'firstname' => $this->firstname,
+                'name' => $this->name,
+                'subject' => $this->subject,
                 'email' => $this->email,
                 'content' => $this->content,
-                // 'subject' => $this->subject,
                 'created_at' => $this->created_at
             ],
             get_object_vars($this)
         );
     }
     // On crée une function qui récupère tous les mails qui ont été enregistrés dans la base de données. On crée plus haut ligne 16 de ce fichier une variable dans laquelle on stock le nom de la table qui contient les mails. Ce nom de table, on l'avait défini quelques commit plus haut ligne 35 de ce fichier.
+    // Cette fonction permet de récupérer tout ce qui se trouve dans notre table.
     public static function all()
     {
         global $wpdb;
@@ -55,7 +56,7 @@ class Mail
     // On crée une seconde function 'find()' pour faire une requête différente de 'all()'. 'find' ira récupérer dans la base de données que les mails dont l'id vaut ce qui est passé dans l'url.
 
     /**
-     * Fonction qui va chercher l'entrée de la table qui a l'id correspondant.
+     * Fonction qui va récupérer l'élément selon son id.
      */
     public static function find($id)
     {
@@ -72,7 +73,7 @@ class Mail
         return $mail;
     }
 
-
+    // Fonction qui permet de mettre à jour les données quand on clique sur 'edit'.
     public function update()
     {
         global $wpdb;

@@ -18,7 +18,7 @@
             <a href="<?php menu_page_url('news-letter'); ?>&action=edit&id=<?= $news->id; ?>" class="button bg-warning text-white">editer</a>
             <form class="form-inline d-inline-block" action="<?php get_site_url(); ?>?action=news-delete" method="post">
                 <input type="hidden" name="id" value="<?= $news->id; ?>">
-                <button type="submit" class="button">supprimer</button>
+                <button type="submit" class="button bg-danger text-light">supprimer</button>
             </form>
         </div>
     </div>
