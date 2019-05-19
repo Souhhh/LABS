@@ -3,11 +3,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Request;
 use App\Http\Models\Mail;
+use App\Http\Middlewares\CheckPermission;
 
 class MailController
 {
     public static function send()
     {
+        // Vérification des permissions
+        CheckPermission::check('create_email');
+
+
         // On vérifie la sécurité pour voir si le formulaire est bien authentique, que le formulaire est bien celui de notre page.
         // if (!wp_verify_nonce($_POST['_wpnonce'], 'send-mail')) {
         //     return;
@@ -76,6 +81,10 @@ class MailController
     // Fonction qui récupère la liste de tous les mails et les afficher.
     public static function index()
     {
+        // Vérfication des permissions
+        CheckPermission::check('read_email');
+
+
         // On fait appel à la function all venant de la class Mail et on compact son contenu dans notre view
         // On va chercher toutes les entrées de la table dont le model mail s'occupe et on inverse l'ordre afin d'avoir le plus récent en premier.
         $mails = array_reverse(Mail::all());
@@ -98,6 +107,10 @@ class MailController
      */
     public static function show()
     {
+        // Vérification des permissions
+        CheckPermission::check('show_email');
+
+
         // Maintenant qu'on est ici, on a besoin de savoir quel mail est demandé. On va donc dans notre url voir que vaut id= ?? et on le stock dans une variable $id
         $id = $_GET['id'];
         // On fait appel à notre function find et on passe en paramètre l'id pour que notre function sache l'email à aller chercher dans notre base de données.
@@ -111,6 +124,10 @@ class MailController
     // Fonction qui permet d'aller dans la base de données récupérer le mail dont l'id a été envoyé en POST via le link dans l'url
     public static function edit()
     {
+        // Vérification des permissions
+        CheckPermission::check('edit_email');
+
+
         $id = $_GET['id'];
         $mail = Mail::find($id);
         view('pages/edit-mail', compact('mail'));
@@ -159,6 +176,10 @@ class MailController
     // Fonction qui est lancée via le hook admin_action_mail-delete ligne 23 du fichier hooks.php
     public static function delete()
     {
+        // Vérification des permissions
+        CheckPermission::check('delete');
+
+
         // On récupère l'id envoyé via $_POST notre formulaire ligne 29 dans show-mail.html.php
         $id = $_POST['id'];
         // Si notre function delete($id) est lancée, alors on rempli SESSION avec un status et un message positif puis on redirect sur notre page mail-client

@@ -21,7 +21,7 @@ use App\Features\Pages\SendMail;
 use App\Features\Pages\Newsletter;
 use App\Http\Controllers\NewsController;
 
-
+use App\Features\Roles\Role;
 
 // add_action pour le post type SERVICES
 add_action('init', [ServicesPostType::class, 'register']);
@@ -67,3 +67,9 @@ add_action('admin_post_nopriv_send-news', [NewsController::class, 'send']);
 add_action('admin_action_news-delete', [NewsController::class, 'delete']);
 // Ajout d'un add_action pour éditer un mail
 add_action('admin_action_news-update', [NewsController::class, 'update']); 
+
+
+// On ajoute la méthode qui va s'exécuter lors de l'activation du plugin
+// Cette fonction ne s'active que lors de l'activation du plugin
+register_activation_hook(__DIR__ . '/services.php', [Database::class, 'init']);
+register_activation_hook(__DIR__ . '/services.php', [Role::class, 'init']);

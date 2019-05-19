@@ -1,8 +1,23 @@
 <?php
+
 namespace App;
 
 class Setup
-{
+{  
+
+    /**
+     * Fonction pour ajouter des scripts et css pour l'admin	               
+     */
+    public static function enqueue_scripts($page)
+    {
+        wp_enqueue_style('flaticon', LABS_PLUGIN_URL . "resources/assets/css/flaticon.css");
+        wp_enqueue_style('icons', LABS_PLUGIN_URL . "resources/assets/css/icones.css");
+        wp_enqueue_script('icones', LABS_PLUGIN_URL . "resources/assets/scripts/icone.js", [], '', true);
+        // cette css a été créer à partir des fichiers scss de bootstrap en n'utilisant que la partie grid. Si vous essayez de reproduire cette action, sachez que j'ai du rajouter ceci manuellement *{box-sizing:border-box};	
+        wp_enqueue_style('admin-bootstrap-grid', LABS_PLUGIN_URL . "/resources/assets/css/bootstrap-grid.css");
+    }
+
+
     /**
      * Fonction pour démarrer une session afin de pouvoir utiliser la variable $_SESSION
      * 
@@ -16,12 +31,6 @@ class Setup
             session_start();
         }
     }
-    /* Fonction pour ajouter des sripts et css pour l'admin */
-    public static function enqueue_scripts($page)
-    {
-        // Cette css a été crée à partir des fichiers scss de bootstrap en utilisant que la partie grid. Si vous essayez de reproduire cette action, sachez que j'ai du rajouter ceci manuellement *{box-sizing:border-box};
-        wp_enqueue_style('admin-bootstrap-grid', LABS_PLUGIN_URL . "/resources/assets/css/bootstrap-grid.css");
-    }
 
     /**
      * Configuration du phpmailer pour rediriger les mails vers mailTrap
@@ -29,13 +38,14 @@ class Setup
      * @param [type] $phpmailer
      * @return void
      */
-    public static function mailtrap($phpmailer)
-    {
-        $phpmailer->isSMTP();
-        $phpmailer->Host = 'smtp.mailtrap.io';
-        $phpmailer->SMTPAuth = true;
-        $phpmailer->Port = 2525;
-        $phpmailer->Username = 'e18a02f37d0621';
-        $phpmailer->Password = '97a646df70bb5c';
-    }
+    // public static function mailtrap($phpmailer)
+    // {
+    //     $phpmailer->isSMTP();
+    //     $phpmailer->Host = 'smtp.mailtrap.io';
+    //     $phpmailer->SMTPAuth = true;
+    //     $phpmailer->Port = 2525;
+    //     $phpmailer->Username = '9f36aa3a3fa949';
+    //     $phpmailer->Password = '23fb6f19d3a28d';
+    // }
+   
 }
