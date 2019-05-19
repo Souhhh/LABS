@@ -6,7 +6,7 @@ $coordonnees = get_theme_mod('labs-contact-coord', __(''));
 ?>
 
 <!-- Contact section -->
-<div class="contact-section spad fix">
+<div class="contact-section spad fix" id="mails">
   <div class="container">
     <div class="row">
       <!-- contact info -->
@@ -26,7 +26,7 @@ $coordonnees = get_theme_mod('labs-contact-coord', __(''));
         <?php view('partials/notice'); ?>
         <!-- admin-post.php -->
 
-        <form action="<?= admin_url('admin-post.php'); ?>#mail" method="post" class="form-class" id="con_form">
+        <form action="<?= admin_url('admin-post.php'); ?>#mails" method="post" class="form-class" id="con_form">
           <input type="hidden" name="action" value="send-mail">
           <!-- Cette fonction crée des inputs cachés qui contiennent des informations qui vont nous permettre de savoir si le formulaire est authentique et s'il est bien exécuté via notre site web et pas via une autre source. -->
           <?php wp_nonce_field('send-mail'); ?>

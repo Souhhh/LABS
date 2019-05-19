@@ -30,8 +30,8 @@ class News
                 'id' => $this->id,
                 'email' => $this->email,
                 'created_at' => $this->created_at,
-            ],
-            get_object_vars($this)
+            ]
+            // get_object_vars($this)
         );
     }
 

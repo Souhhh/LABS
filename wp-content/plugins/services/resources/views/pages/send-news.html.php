@@ -7,12 +7,12 @@
 
      <!-- Ici nous ajoutons une partie d'html afin de prendre en charge les notifications. On met cela dans un fichier à part afin de pouvoir réutiliser les notifications ailleurs -->
 
-     <?php view('partials/notice'); ?>
-
+     
      <div class="row">
-
+         
          <div class="col-sm-6">
-        <p>Liste reprenant les clients abonnés à la Newsletter.</p>
+             <p>Liste reprenant les clients abonnés à la Newsletter.</p>
+             <?php view('partials/notice2'); ?>
             <?php foreach ($mails as $mail) : ?>
             <div class="postbox">
                 <div class="inside">

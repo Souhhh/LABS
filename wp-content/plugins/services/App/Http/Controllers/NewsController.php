@@ -13,21 +13,21 @@ class NewsController
             return;
         };
 
-        // Request::validation([
-        //     'email' => 'email',
-        // ]);
+        Request::validation([
+            'email_newsletter' => 'email',
+        ]);
 
         $news = new News();
-        $is_email = is_email($_POST['email']);
-        if (!$is_email) {
-            $_SESSION['error'] = [
-                'status' => 'error',
-                'message' => 'Problème !!!'
-            ];
-            wp_safe_redirect(wp_get_referer());
-            exit;
-        }
-        $news->email = sanitize_email($_POST['email']);
+        // $is_email = is_email($_POST['email']);
+        // if (!$is_email) {
+        //     $_SESSION['error'] = [
+        //         'status' => 'error',
+        //         'message' => 'Problème !!!'
+        //     ];
+        //     wp_safe_redirect(wp_get_referer());
+        //     exit;
+        // }
+        $news->email = sanitize_email($_POST['email_newsletter']);
         
         $news->save();
 
@@ -102,13 +102,13 @@ class NewsController
         };
         // On vérifie les valeurs
         Request::validation([
-            'email' => 'email'
+            'email_newsletter' => 'email'
         ]);
         $news = News::find($_POST['id']);
 
         // On met à jour les nouvelles valeurs
         // $news->userid = get_current_user_id();
-        $news->email = sanitize_email($_POST['email']);
+        $news->email = sanitize_email($_POST['email_newsletter']);
 
         if ($news->update()) {
             $_SESSION['notice'] = [
@@ -124,22 +124,22 @@ class NewsController
         wp_safe_redirect(wp_get_referer());
     }
 
-    // public static function delete()
-    // {
-    //     $id = $_POST['id'];
+    public static function delete()
+    {
+        $id = $_POST['id'];
 
-    //     if (Newsletter::delete($id)) {
-    //         $_SESSION['notice'] = [
-    //             'status' => 'success',
-    //             'message' => 'Le mail a bien été supprimé'
-    //         ];
-    //         wp_safe_redirect(menu_page_url('newsletter-client'));
-    //     } else {
-    //         $_SESSION['notice'] = [
-    //             'status' => 'error',
-    //             'message' => 'Un problème est survenu, veuillez rééssayer'
-    //         ];
-    //         wp_safe_redirect(wp_get_referer());
-    //     }
-    // }
+        if (News::delete($id)) {
+            $_SESSION['notice'] = [
+                'status' => 'success',
+                'message' => 'Le mail a bien été supprimé'
+            ];
+            wp_safe_redirect(menu_page_url('news-letter'));
+        } else {
+            $_SESSION['notice'] = [
+                'status' => 'error',
+                'message' => 'Un problème est survenu, veuillez rééssayer'
+            ];
+            wp_safe_redirect(wp_get_referer());
+        }
+    }
 }

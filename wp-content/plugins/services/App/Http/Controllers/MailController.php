@@ -51,17 +51,15 @@ class MailController
         // A chaque fois qu'on lance le formulaire d'envoie de mail, on rajoute dans $_SESSION un tableau notice avec 2 clés et leur valeur.
         // Si le mail est bien envoyé, status = 'success' sinon 'error'.
         if (wp_mail($email, 'Pour ' . $name, $message_template, $header)) {
-            $_SESSION['notice'] = [
+            $_SESSION['notice_mail'] = [
                 'status' => 'success',
                 'message' => 'Votre e-mail a bien été envoyé'
             ];
-            // Nous allons également sauvegarder en base de données les mails que nous avons envoyé.
             // Refactoring pour apprendre et utiliser les models. Seuls les models peuvent interagir avec la base de données.
-            // On instancie la class Mail et on rempli les valeurs dans les propriétés.
 
             // Sauvegarde du mail dans la base de données
         } else {
-            $_SESSION['notice'] = [
+            $_SESSION['notice_mail'] = [
                 'status' => 'error',
                 'message' => 'Une erreur est survenue, veuillez réessayer plus tard'
             ];
@@ -71,9 +69,6 @@ class MailController
         // On rajoute $header en 5ime paramètre 
         // On change $message par $mail. Cela veut dire qu'on envoie plus message dans le contenu du mail mais ce qui est retourné par $mail c'est-à-dire le contenu de notre page template-mail.html.php 
 
-        // if (!wp_verify_nonce($_POST['_wpnonce'], 'send-mail')) {
-        //     return;
-        // };
         // La fonction wp_safe_redirect redirige vers une url. La fonction wp_get_referer renvoie vers la page d'où la requête a été envoyée.
         wp_safe_redirect(wp_get_referer());
     }
@@ -86,7 +81,7 @@ class MailController
         $mails = array_reverse(Mail::all());
 
         $old = [];
-        if (isset($_SESSION['old']) && ($_SESSION['notice']['status'] == 'error')) {
+        if (isset($_SESSION['old']) && ($_SESSION['notice_mail']['status'] == 'error')) {
             $old = $_SESSION['old'];
             unset($_SESSION['old']);
         }
@@ -148,12 +143,12 @@ class MailController
         // On met à jour dans la base de donnée et on renvoi une notification
         // $mail->update();
         if ($mail->update()) {
-            $_SESSION['notice'] = [
+            $_SESSION['notice_mail'] = [
                 'status' => 'success',
                 'message' => 'Votre e-mail a bien été modifié'
             ];
         } else {
-            $_SESSION['notice'] = [
+            $_SESSION['notice_mail'] = [
                 'status' => 'error',
                 'message' => 'Une erreur est survenue, veuillez réessayer plus tard'
             ];
@@ -164,11 +159,11 @@ class MailController
     // Fonction qui est lancée via le hook admin_action_mail-delete ligne 23 du fichier hooks.php
     public static function delete()
     {
-        // On récuère l'id envoyé via $_POST notre formulaire ligne 29 dans show-mail.html.php
+        // On récupère l'id envoyé via $_POST notre formulaire ligne 29 dans show-mail.html.php
         $id = $_POST['id'];
         // Si notre function delete($id) est lancée, alors on rempli SESSION avec un status et un message positif puis on redirect sur notre page mail-client
         if (Mail::delete($id)) {
-            $_SESSION['notice'] = [
+            $_SESSION['notice_mail'] = [
                 'status' => 'success',
                 'message' => 'Le mail a bien été supprimé'
             ];
@@ -176,7 +171,7 @@ class MailController
         }
         // Si le mail na pas été supprimé on renvoi sur la page avec une notification négative
         else {
-            $_SESSION['notice'] = [
+            $_SESSION['notice_mail'] = [
                 'status' => 'error',
                 'message' => 'Un problème est survenu, veuillez rééssayer'
             ];

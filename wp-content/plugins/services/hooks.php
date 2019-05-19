@@ -53,14 +53,15 @@ add_action('init', [Setup::class, 'start_session']); // Pour ce add_action, on s
 // Cette fonction ne s'active que lors de l'activation du plugin
 register_activation_hook(__DIR__ . '/services.php', [Database::class, 'init']);
 add_action('admin_enqueue_scripts', [Setup::class, 'enqueue_scripts']);
-// Hook personnalisé, c'est la combinaison du hook 'admin_action_' de WordPres avec mail-delete qui est l'action qu'on envoie dans l'url ligne 27 du fichier show-mail.html.php 
+// Hook personnalisé, c'est la combinaison du hook 'admin_action_' de WordPress avec mail-delete qui est l'action qu'on envoie dans l'url ligne 27 du fichier show-mail.html.php 
 add_action('admin_action_mail-delete', [MailController::class, 'delete']);
 add_action('admin_action_mail-update', [MailController::class, 'update']);
 
 
 // add_action pour la NEWSLETTER
 // Ajout d'un add_action pour l'envoie de mail depuis l'admin
-add_action('admin_action_send-news', [NewsController::class, 'send']);
+add_action('admin_post_send-news', [NewsController::class, 'send']);
+add_action('admin_post_nopriv_send-news', [NewsController::class, 'send']);
 // add_action('admin_post_nopriv_add_send-newsletter', [NewsletterController::class, 'send']);
 // Ajout d'un add_action pour la suppression d'un mail depuis l'admin
 add_action('admin_action_news-delete', [NewsController::class, 'delete']);

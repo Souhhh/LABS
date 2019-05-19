@@ -14,10 +14,10 @@
                         <strong>E-mail: </strong> <?= $mail->email; ?>
                     </div>
                     <div>
-                        <strong>Nom: </strong> <?= $mail->firstname; ?>
+                        <strong>Nom: </strong> <?= $mail->name; ?>
                     </div>
                     <div>
-                        <strong>Objet: </strong> <?= $mail->lastname; ?>
+                        <strong>Objet: </strong> <?= $mail->subject; ?>
                     </div>
                     <div>
                         <strong>Message: </strong> <?= $mail->content; ?>

@@ -19,11 +19,11 @@
                         </div>
                         <div class="form-group">
                             <label for="name">Nom</label>
-                            <input type="text" class="form-control" id="name" name="name" value="<?= $mail->firstname; ?>">
+                            <input type="text" class="form-control" id="name" name="name" value="<?= $mail->name; ?>">
                         </div>
                         <div class="form-group">
                             <label for="subject">Objet</label>
-                            <input type="text" class="form-control" id="subject" name="subject" value="<?= $mail->lastname; ?>">
+                            <input type="text" class="form-control" id="subject" name="subject" value="<?= $mail->subject; ?>">
                         </div>
                         <div class="form-group">
                             <label for="content">Message</label>

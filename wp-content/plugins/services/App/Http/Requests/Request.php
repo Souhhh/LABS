@@ -46,7 +46,7 @@ class Request{
 
     public static function email(string $input_name) {
         if (!is_email($_POST[$input_name])) {
-            self::$errors[$input_name] = sprintf(__("Le champ '%s' doit être un format email"), $input_name);
+            self::$errors[$input_name] = __("Le champ email doit être un format email");
         }
     }
 }
