@@ -11,7 +11,7 @@ class Role
 
      public static function init()
      {
-        // self::add_cap_for_postType('services');
+        self::add_cap_for_postType('services');
         self::add_cap_for_postType('projets');
         self::add_cap_for_postType('team');
         self::add_cap_for_postType('testimonials');
@@ -23,10 +23,10 @@ class Role
 
         $admins->add_cap('edit_' . $slug_postType);
         $admins->add_cap('edit_' . $slug_postType . 's');
-        $admins->add_cap('edit_other' . $slug_postType . 's');
+        $admins->add_cap('edit_other_' . $slug_postType . 's');
         $admins->add_cap('publish_' . $slug_postType . 's');
         $admins->add_cap('read_' . $slug_postType);
-        $admins->add_cap('read_private' . $slug_postType . 's');
+        $admins->add_cap('read_private_' . $slug_postType . 's');
         $admins->add_cap('delete_' . $slug_postType);
     }
 }

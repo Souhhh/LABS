@@ -5,6 +5,7 @@ namespace App\Features\PostTypes;
 class ProjetsPostType
 {
     public static $slug = 'projets';
+
     public static function register()
     {
         register_post_type(
@@ -32,22 +33,21 @@ class ProjetsPostType
                     'item_reverted_to_draft' => __('Le projet est retourné au brouillon.'),
                     'item_scheduled' => __('projet planifié.'),
                     'item_updated' => __('projet mis à jours.'),
-                    'capability_type' => 'post',
-                    'capabilities' => array(
-                        'edit_post' => 'edit_projet',
-                        'edit_posts' => 'edit_projets',
-                        'edit_others_posts' => 'edit_other_projets',
-                        'publish_posts' => 'publish_projets',
-                        'read_post' => 'read_projet',
-                        'read_private_posts' => 'read_private_projets',
-                        'delete_post' => 'delete_projet',
-                      ),
                 ],
                 'public' => true,
                 'has_archive' => true,
                 'rewrite' => [
                     'slug' => 'projets'
                 ],
+                'capabilities' => array(
+                    'edit_post' => 'edit_projet',
+                    'edit_posts' => 'edit_projets',
+                    'edit_others_posts' => 'edit_other_projets',
+                    'publish_posts' => 'publish_projets',
+                    'read_post' => 'read_projet',
+                    'read_private_posts' => 'read_private_projets',
+                    'delete_post' => 'delete_projet',
+                  ),
                 'menu_icon' => 'dashicons-portfolio',
                 'supports' => ['title', 'editor', 'thumbnail']                
             ]

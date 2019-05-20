@@ -44,16 +44,6 @@ class ServicesPostType
                     'item_reverted_to_draft' => __('Le Service est retourné au brouillon.'),
                     'item_scheduled' => __('Service planifié.'),
                     'item_updated' => __('Service mis à jours.'),
-                    'capability_type' => 'post',
-                    'capabilities' => array(
-                        'edit_post' => 'edit_service',
-                        'edit_posts' => 'edit_services',
-                        'edit_others_posts' => 'edit_other_services',
-                        'publish_posts' => 'publish_services',
-                        'read_post' => 'read_service',
-                        'read_private_posts' => 'read_private_services',
-                        'delete_post' => 'delete_service',
-                      ),
                 ],
                 'public' => true,
                 // has_archive nous permet de nous render sur http://localhost:8080/index.php/services/ et d'y trouver tous nos services. Si cela ne fonctionne pas, c'est possible qu'il nous faille réécrire nos permaliens. Pour ce faire, aller dans notre backoffice -> Settings -> Permaliens et cliquer sur Enregistrer les modifications. Après avoir fait ça, tester en passant de true à false et actualiser puis observer.
@@ -61,6 +51,15 @@ class ServicesPostType
                 'rewrite' => [
                     'slug' => 'services'
                 ],
+                'capabilities' => array(
+                    'edit_post' => 'edit_service',
+                    'edit_posts' => 'edit_services',
+                    'edit_others_posts' => 'edit_other_services',
+                    'publish_posts' => 'publish_services',
+                    'read_post' => 'read_service',
+                    'read_private_posts' => 'read_private_services',
+                    'delete_post' => 'delete_service',
+                  ),
                 'menu_icon' => 'dashicons-nametag',
                 // On choisi dans supports ce qu'on veut rendre accessible dans notre post-type : un titre, un textarea, un extrait et la possibilité de rajouter une image mise en avant.
                 'supports' => ['title', 'editor', 'thumbnail'],

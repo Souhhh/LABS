@@ -15,7 +15,7 @@ class Request{
             // En même temps qu'on fait les vérifications pour savoir si les champs sont bien remplis, on en profite pour stocker ce qu'à écris le client dans notre super globale $_SESSION sous la clé 'old'.
         }
 
-        // On vérifie que $errors contient quelque chose. Si c'est quelque chose. Si c'est le cas, alors on récupère tous les messages d'erreurs qu'on y a stoché. On fait un foreach dessus pour réécrire chaque ligne qu'on stock dans une variable $message.
+        // On vérifie qerrorsue $errors contient quelque chose. Si c'est quelque chose. Si c'est le cas, alors on récupère tous les messages d'erreurs qu'on y a stoché. On fait un foreach dessus pour réécrire chaque ligne qu'on stock dans une variable $message.
         if (count(self::$errors) != 0) {
             $message = "";
             foreach (self::$errors as $key => $value) {

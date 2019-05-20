@@ -7,8 +7,10 @@
        </div>
        <div class="col-md-9">
          <?php
-          echo $_SESSION['error']['message'];
-          unset($_SESSION['error'])
+          if (isset($_SESSION['error'])) {
+            echo $_SESSION['error']['message'];
+            unset($_SESSION['error']);
+          }
           ?>
          <!-- newsletter form -->
          <?php view('partials/notice2'); ?>

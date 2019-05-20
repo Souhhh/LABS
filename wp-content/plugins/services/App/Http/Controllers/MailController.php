@@ -10,7 +10,7 @@ class MailController
     public static function send()
     {
         // Vérification des permissions
-        CheckPermission::check('create_email');
+        // CheckPermission::check('create_email');
 
 
         // On vérifie la sécurité pour voir si le formulaire est bien authentique, que le formulaire est bien celui de notre page.
@@ -82,7 +82,7 @@ class MailController
     public static function index()
     {
         // Vérfication des permissions
-        CheckPermission::check('read_email');
+        // CheckPermission::check('read_email');
 
 
         // On fait appel à la function all venant de la class Mail et on compact son contenu dans notre view
@@ -108,7 +108,7 @@ class MailController
     public static function show()
     {
         // Vérification des permissions
-        CheckPermission::check('show_email');
+        // CheckPermission::check('show_email');
 
 
         // Maintenant qu'on est ici, on a besoin de savoir quel mail est demandé. On va donc dans notre url voir que vaut id= ?? et on le stock dans une variable $id
@@ -125,7 +125,7 @@ class MailController
     public static function edit()
     {
         // Vérification des permissions
-        CheckPermission::check('edit_email');
+        // CheckPermission::check('edit_email');
 
 
         $id = $_GET['id'];
@@ -177,7 +177,7 @@ class MailController
     public static function delete()
     {
         // Vérification des permissions
-        CheckPermission::check('delete');
+        // CheckPermission::check('delete');
 
 
         // On récupère l'id envoyé via $_POST notre formulaire ligne 29 dans show-mail.html.php
