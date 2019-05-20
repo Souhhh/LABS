@@ -49,7 +49,7 @@ class ProjetsPostType
                     'delete_post' => 'delete_projet',
                   ),
                 'menu_icon' => 'dashicons-portfolio',
-                'supports' => ['title', 'editor', 'thumbnail']                
+                'supports' => ['title', 'editor', 'thumbnail'],                
             ]
         );
     }

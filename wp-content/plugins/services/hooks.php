@@ -48,6 +48,7 @@ add_action('save_post_' . ProjetsPostType::$slug, [ProjetsDetailsMetabox::class,
 // add_action pour les MAILS
 add_action('admin_menu', [Page::class, 'init']);
 add_action('admin_post_send-mail', [MailController::class, 'send']);
+add_action('admin_post_nopriv_send-mail', [MailController::class, 'send']);
 add_action('init', [Setup::class, 'start_session']); // Pour ce add_action, on supprime le 'admin_' devant pour que ce soit aussi accessible lorsqu'on est pas connecté au site.
 
 // Cette fonction ne s'active que lors de l'activation du plugin

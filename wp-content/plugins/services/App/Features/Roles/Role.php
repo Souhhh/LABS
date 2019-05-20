@@ -9,12 +9,27 @@ class Role
      * Fonction d'initialisation des rôles
      */
 
-     public static function init()
-     {
-        self::add_cap_for_postType('services');
-        self::add_cap_for_postType('projets');
-        self::add_cap_for_postType('team');
-        self::add_cap_for_postType('testimonials');
+    public static function init()
+    {
+        add_role(
+            'simple_role',
+            'Simple Role',
+            [
+                'read' => true,
+                'edit_posts' => true,
+                'edit_published_posts' => true,
+                'publish_posts' => true,
+                'upload_files' => true,
+
+                'delete_posts' => true,
+                'delete_published_posts' => true,
+            ]
+        );
+
+        self::add_cap_for_postType('services'); // pas OK
+        self::add_cap_for_postType('projets'); // pas OK
+        self::add_cap_for_postType('team'); // affichage OK
+        self::add_cap_for_postType('testimonials'); // pas OK
     }
 
     public static function add_cap_for_postType($slug_postType)
