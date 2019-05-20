@@ -44,7 +44,7 @@ class NewsController
         // Sauvegarde de l'adresse mail dans la base de données
         // $news->save();
 
-        // A chaque fois qu'on envoie un mail via l'inout, on rajoute dans $_SESSION un tableau notice avec 2 clés et leur valeur.
+        // A chaque fois qu'on envoie un mail via l'input, on rajoute dans $_SESSION un tableau notice avec 2 clés et leur valeur.
         // Si l'adresse mail est bien envoyéé, status = 'success', sinon 'error'.
         if (wp_mail("admin.admin@gmail.com", "Inscription à la Newsletter", "Nouvelle insciption à la Newsletter " . $news->email)) {
             $_SESSION['notice'] = [

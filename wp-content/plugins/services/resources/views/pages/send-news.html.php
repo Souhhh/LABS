@@ -12,7 +12,7 @@
          
          <div class="col-sm-6">
              <p>Liste reprenant les clients abonnés à la Newsletter.</p>
-             <?php view('partials/notice2'); ?>
+             
             <?php foreach ($mails as $mail) : ?>
             <div class="postbox">
                 <div class="inside">

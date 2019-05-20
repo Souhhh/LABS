@@ -3,7 +3,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Request;
 use App\Http\Models\Mail;
-use App\Http\Middlewares\CheckPermission;
 
 class MailController
 {

@@ -22,7 +22,7 @@ class Request{
                 $message .= $value . '<br>';
             }
             // On rempli notre $_SESSION avec toutes nos erreurs réécrites pour que l'affichage soit mieux présenté.
-            $_SESSION['notice'] = [
+            $_SESSION['notice_mail'] = [
                 'status' => 'error',
                 'message' => $message
             ];
@@ -34,6 +34,26 @@ class Request{
             wp_safe_redirect(wp_get_referer());
             // Permet d'arrêter le script tant qu'il y a des erreurs à partir de la ligne 44 de notre fichier SendMail.php
             exit;
+        }
+    }
+
+    public static function validation2 (array $data)
+    {
+        foreach ($data as $input_name => $verification) {
+            call_user_func([self::class, $verification], $input_name);
+
+            $_SESSION['old'][$input_name] = $_POST[$input_name];
+        }
+        if (count(slef::$errors) !=0) {
+            $message = "";
+            foreach (self::$errors as $key => $value) {
+                $message .= $value . '<br>';
+            }
+            $_SESSION['notice'] = [
+                'status' => 'error',
+                'message' => $message
+            ];
+            wp_safe_redirect(wp_get_referer());
         }
     }
     // La méthode 'validation' a redistribué via son foreach dans l'une ou l'autre méthode (required, email) selon ce que vaut '$verification' tout en remplissant notre paramètre $input_name ci-dessous par la valeur $input_name rempli ligne 16 ci-dessus.

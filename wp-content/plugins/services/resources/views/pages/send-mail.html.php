@@ -11,7 +11,7 @@
         <div class="col-sm-6">
             <!-- Sous-titre de la page reprenant la liste des mails envoyés par les clients -->
             <p>Cette liste reprend tous les mails envoyés via votre site.</p>
-            <?php view('partials/notice'); ?>
+            
             <!-- On recoit la variable mails (celle qu'on a compact dans le commit précédent). C'est une variable qui contient un tableau contenant chaque mail enregistré dans la base de données. On va donc faire un foreach afin d'avoir un rendu correct. -->
             <?php foreach ($mails as $mail) : ?>
                 <div class="postbox">
