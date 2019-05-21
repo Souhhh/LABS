@@ -68,8 +68,8 @@ get_template_part('templates/blog/banner');
                         <h2>
                             <?php comments_number(); ?></h2>
                         <ul class="comment-list">
-                            <?php $postId = 'post_id=' . get_the_ID(); ?>
-                            <?php $commentaires = get_comments($postId);
+                            <?php $postId = get_the_ID(); ?>
+                            <?php $commentaires = get_approved_comments($postId);
                             foreach ($commentaires as $commentaire) : ?>
                                 <li>
                                     <div class="commetn-text">
