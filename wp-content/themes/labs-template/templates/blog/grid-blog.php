@@ -42,7 +42,7 @@
 					<a href=""><?php comments_number(); ?></a>
 				</div>
 				<p class="post-content">
-						<?php the_content(); ?>
+						<?php the_excerpt(); ?>
 				</p>
 				<a href="<?php the_permalink(); ?>" class="read-more">Read More</a>
 			</div>
