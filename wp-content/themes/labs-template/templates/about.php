@@ -6,6 +6,7 @@ $title2 = get_theme_mod('labs-about-title2', __('Titre de la section'));
 $title3 = get_theme_mod('labs-about-title3', __('Titre de la section'));
 $video = get_theme_mod('labs-video');
 $vignette = get_theme_mod('labs-video-vign');
+$button = get_theme_mod('labs-about-button');
 ?>
 
 
@@ -24,7 +25,7 @@ $vignette = get_theme_mod('labs-video-vign');
           </div>
         </div>
         <div class="text-center mt60">
-          <a href="<?= get_page_link(31); ?>" class="site-btn">Browse</a> 
+          <a href="<?= get_page_link(31); ?>" class="site-btn"><?= $button; ?></a> 
         </div>
         <!-- popup video -->
         <div class="intro-video">

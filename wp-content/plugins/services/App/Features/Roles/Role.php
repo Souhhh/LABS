@@ -11,20 +11,20 @@ class Role
 
     public static function init()
     {
-        add_role(
-            'simple_role',
-            'Simple Role',
-            [
-                'read' => true,
-                'edit_posts' => true,
-                'edit_published_posts' => true,
-                'publish_posts' => true,
-                'upload_files' => true,
+        // add_role(
+        //     'simple_role',
+        //     'Simple Role',
+        //     [
+        //         'read' => true,
+        //         'edit_posts' => true,
+        //         'edit_published_posts' => true,
+        //         'publish_posts' => true,
+        //         'upload_files' => true,
 
-                'delete_posts' => true,
-                'delete_published_posts' => true,
-            ]
-        );
+        //         'delete_posts' => true,
+        //         'delete_published_posts' => true,
+        //     ]
+        // );
 
         self::add_cap_for_postType('services'); // pas OK
         self::add_cap_for_postType('projets'); // pas OK

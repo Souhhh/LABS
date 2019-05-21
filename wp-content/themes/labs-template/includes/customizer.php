@@ -124,6 +124,11 @@ class MgCustomizer
             'type' => 'theme_mod',
             'sanitize_callback' => 'sanitize_textarea_field'
         ]);
+        // Setting pour le changement du texte du bouton 'browse'
+        $wp_customize->add_setting('labs-about-button', [
+            'type' => 'theme_mod',
+            'sanitize_callback' => 'sanitize_textarea_field'
+        ]);
         // SECTION NAVBAR
         // Setting pour le changement du logo de la navbar
         $wp_customize->add_setting('labs-header', [
@@ -310,6 +315,14 @@ class MgCustomizer
             'label' => __('Texte colonne droite'),
             // 'description' => __('Personnalisez le texte de la colonne droite'),
             'type' => 'textarea'
+        ]);
+        // Control pour la partie 1 du titre
+        $wp_customize->add_control('labs-about-button-control', [
+            'section' => 'labs-about-section-text',
+            'settings' => 'labs-about-button',
+            'label' => __('Bouton'),
+            // 'description' => __('Personnalisez la partie gauche du titre'),
+            'type' => 'text'
         ]);
         // SECTION NAVBAR
         // Control pour le logo de la navbar
