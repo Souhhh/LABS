@@ -69,6 +69,21 @@
 		));
 		wp_reset_postdata();
 		?>
+	</div>
+</div>
 
+
+<!-- Sidebar area -->
+<div class="col-md-4 col-sm-5 sidebar">
+	<?php dynamic_sidebar('widget'); ?>
+	<div class="widget-item">
+		<h2 class="widget-title">Tags</h2>
+		<ul class="tag">
+			<?php
+			$allTags = get_tags();
+			foreach ($allTags as $tag) { echo '<li><a href="' .  get_tag_link($tag->term_id).'"> ' . $tag->name . '</a></li>';
+			};
+			?>
+		</ul>
 	</div>
 </div>

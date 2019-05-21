@@ -6,8 +6,8 @@ class MgWidgetRegister
     {
         register_sidebar(array(
             'name' => __('Widgets'),
-            'id' => 'wigdets',
-            'before_widget' => '<div class="widget-item">',
+            'id' => 'wigdet',
+            'before_widget' => '<div class="widget-item mt-5">',
             'after_widget' => '</div>',
             'before_title' => '<h2 class="widget-title">',
             'after_title' => '</h2>',
