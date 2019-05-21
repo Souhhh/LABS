@@ -13,8 +13,8 @@ class NewsController
             return;
         };
 
-        Request::validation([
-            'email_newsletter' => 'email',
+        Request::validation2([
+            'email_newsletter' => 'email'
         ]);
 
         $news = new News();

@@ -1,7 +1,7 @@
 <div class="col-md-8 col-sm-7 blog-posts">
 	<?php
 	$paged = (get_query_var('paged')) ?
-	get_query_var('paged') : 1;
+		get_query_var('paged') : 1;
 	?>
 
 	<!-- Post item -->
@@ -32,17 +32,17 @@
 				<div class="post-meta">
 					<a href=""><?php the_author(); ?></a>
 					<a href=""> <?php $postTags = get_the_tags();
-					if ($postTags){
-						foreach($postTags as $tag){
-							echo $tag->name . "," . ' ' . '';
-						}
-					}
-					?>
+								if ($postTags) {
+									foreach ($postTags as $tag) {
+										echo $tag->name . "," . ' ' . '';
+									}
+								}
+								?>
 					</a>
 					<a href=""><?php comments_number(); ?></a>
 				</div>
 				<p class="post-content">
-						<?php the_excerpt(); ?>
+					<?php the_excerpt(); ?>
 				</p>
 				<a href="<?php the_permalink(); ?>" class="read-more">Read More</a>
 			</div>
@@ -81,7 +81,8 @@
 		<ul class="tag">
 			<?php
 			$allTags = get_tags();
-			foreach ($allTags as $tag) { echo '<li><a href="' .  get_tag_link($tag->term_id).'"> ' . $tag->name . '</a></li>';
+			foreach ($allTags as $tag) {
+				echo '<li><a href="' .  get_tag_link($tag->term_id) . '"> ' . $tag->name . '</a></li>';
 			};
 			?>
 		</ul>

@@ -16,3 +16,5 @@ class MgWidgetRegister
     }
 }
 add_action('widgets_init', [MgWidgetRegister::class, 'register']);
+?>
+
