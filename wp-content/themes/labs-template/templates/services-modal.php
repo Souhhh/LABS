@@ -8,6 +8,7 @@ $args = [
 $query = new WP_Query($args);
 ?>
 
+
 <?php while ($query->have_posts()) :
   $query->the_post();
   $icon = get_post_meta(get_the_ID(), 'choix_icone', true); ?>

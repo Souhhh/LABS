@@ -26,10 +26,10 @@ class Role
         //     ]
         // );
 
-        self::add_cap_for_postType('services'); // pas OK
-        self::add_cap_for_postType('projets'); // pas OK
-        self::add_cap_for_postType('team'); // affichage OK
-        self::add_cap_for_postType('testimonials'); // pas OK
+        self::add_cap_for_postType('service'); 
+        self::add_cap_for_postType('projet'); 
+        self::add_cap_for_postType('team'); 
+        self::add_cap_for_postType('testimonial'); 
     }
 
     public static function add_cap_for_postType($slug_postType)

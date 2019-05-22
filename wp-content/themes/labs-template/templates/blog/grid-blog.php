@@ -25,7 +25,6 @@
 					<h3><?php the_time('F Y'); ?></h3>
 				</div>
 			</div>
-			<div class="">
 				<h2 class="post-title">
 					<?php the_title(); ?>
 				</h2>
@@ -45,7 +44,6 @@
 					<?php the_excerpt(); ?>
 				</p>
 				<a href="<?php the_permalink(); ?>" class="read-more">Read More</a>
-			</div>
 		</div>
 	<?php endwhile; ?>
 
@@ -75,7 +73,7 @@
 
 <!-- Sidebar area -->
 <div class="col-md-4 col-sm-5 sidebar">
-	<?php dynamic_sidebar('widget'); ?>
+	<?php get_sidebar('widget'); ?>
 	<div class="widget-item">
 		<h2 class="widget-title">Tags</h2>
 		<ul class="tag">
